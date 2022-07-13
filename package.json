@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "axios": "^0.27.2",
+    "react-naver-maps": "^0.0.13"
+  }
+}
