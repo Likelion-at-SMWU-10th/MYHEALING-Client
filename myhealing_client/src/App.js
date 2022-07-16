@@ -1,18 +1,17 @@
 import React from "react";
-import Map from "./page/map/Map";
-import Inform from './page/map/Inform';
-import Header from "./page/header/Header";
-import Bottom from './page/bottom/Bottom';
+import { Routes, Route } from "react-router-dom";
+import Home from "./page/Home";
+import MenuBar from "./page/Menubar";
+import MapMain from "./page/map/MapMain";
 
-function App() {
+const App = () => {
   return (
-    <>
-    <Header />
-      < Inform text="지도로 장소 찾기"></Inform>
-        <Map />
-      < Inform text="키워드로 장소 찾기"></Inform>
-    <Bottom />
-    </>
+    <Routes>
+      <Route path="/" element={<MenuBar />}>
+        <Route path="/home" element={<Home />}></Route>
+        <Route path="/map" element={<MapMain />}></Route>
+      </Route>
+    </Routes>
   );
 }
 
