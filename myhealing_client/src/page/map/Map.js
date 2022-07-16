@@ -41,3 +41,10 @@ function Map() {
 }
 
 export default Map;
+
+/*
+
+import dotenv from "dotenv";
+dotenv.config();
+
+*/
