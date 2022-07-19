@@ -1,4 +1,5 @@
 import React from "react";
+import './Home.css';
 import { Carousel } from 'react-bootstrap'; 
 
 const home = () => {
@@ -8,7 +9,7 @@ const home = () => {
             <Carousel>
                 <Carousel.Item>
                 <img
-                    className="d-block w-100"
+                    className="rimg d-block w-100"
                     src="img/dog.jpeg"
                     alt="First slide"
                 />
@@ -19,7 +20,7 @@ const home = () => {
                 </Carousel.Item>
                 <Carousel.Item>
                 <img
-                    className="d-block w-100"
+                    className="rimg d-block w-100"
                     src="img/beach.jpeg"
                     alt="Second slide"
                 />
@@ -31,7 +32,7 @@ const home = () => {
                 </Carousel.Item>
                 <Carousel.Item>
                 <img
-                    className="d-block w-100"
+                    className="rimg d-block w-100"
                     src="img/cool.jpeg"
                     alt="Third slide"
                 />
