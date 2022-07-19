@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { SiNaver } from "react-icons/si";
+
 const Login = () => {
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${"##################"}&redirect_uri=${"http://localhost:3000/kakaoLogin"}&response_type=code`;
   const handleSignKakao = () => {
@@ -24,14 +25,14 @@ const Login = () => {
         <Message>SNS 계정으로 간편하게 시작하세요.</Message>
         <KakaoBtn onClick={handleSignKakao}>
           <KakaoIcon />
-          <p>카카오 계정으로 로그인</p>
+          <P>카카오 계정으로 로그인</P>
         </KakaoBtn>
         <NaverBtn onClick={handleSignNaver}>
           <NaverIcon />
-          <p>네이버 계정으로 로그인</p>
+          <P>네이버 계정으로 로그인</P>
         </NaverBtn>
         <GoogleBtn>
-          <p>구글 계정으로 로그인</p>
+          <P>구글 계정으로 로그인</P>
         </GoogleBtn>
         <LoginMessage>
           <LoginAlready>이미 가입하셨나요?</LoginAlready>
@@ -47,7 +48,7 @@ const LoginContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 120vh;
 `;
 
 const LoginWrapper = styled.div`
@@ -55,7 +56,7 @@ const LoginWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 35rem;
+  width: 40rem;
   height: 28rem;
 `;
 
@@ -64,16 +65,17 @@ const MyHealing = styled.div`
   font-family: "Comfortaa";
   color: #73bd88;
   font-size: 2.8rem;
-  fon-style: normal;
+  font-style: normal;
   font-weight: 400;
 `;
 
 const Alert = styled.div`
+  text-align: center;
   margin-bottom: 2.5rem;
   font-family: "Mulish";
   color: #373f41;
   font-size: 3rem;
-  fon-style: normal;
+  font-style: normal;
   font-weight: 700;
   white-space: pre-wrap;
   line-height: 5rem;
@@ -84,7 +86,7 @@ const Message = styled.div`
   font-family: "Mulish";
   color: #737b7d;
   font-size: 1.5rem;
-  fon-style: normal;
+  font-style: normal;
   font-weight: 400;
 `;
 
@@ -110,7 +112,13 @@ const KakaoBtn = styled.button`
 `;
 
 const KakaoIcon = styled(RiKakaoTalkFill)`
-  margin-bottom: 0.25rem;
+  margin-top: auto;
+  margin-bottom: auto;
+`;
+
+const P = styled.p`
+  text-align: center;
+  margin: auto;
 `;
 
 const NaverBtn = styled.button`
@@ -124,7 +132,7 @@ const NaverBtn = styled.button`
   padding: 1rem 5.2rem;
   margin-bottom: 2.5rem;
   border: none;
-  border-radius: 0.2rem;
+  border-radius: 0.5rem;
   background-color: #2db400;
   font-family: "NotoSansKR";
   font-size: 1rem;
@@ -135,7 +143,8 @@ const NaverBtn = styled.button`
 `;
 
 const NaverIcon = styled(SiNaver)`
-  margin-bottom: 0.25rem;
+  margin-top: auto;
+  margin-bottom: auto;
 `;
 
 const GoogleBtn = styled.button`
@@ -149,7 +158,7 @@ const GoogleBtn = styled.button`
   padding: 1rem 5.2rem;
   margin-bottom: 2.5rem;
   border: none;
-  border-radius: 0.2rem;
+  border-radius: 0.5rem;
   background-color: #cecece;
   font-family: "NotoSansKR";
   font-size: 1rem;
