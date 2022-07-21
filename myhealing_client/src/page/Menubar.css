@@ -1,6 +1,10 @@
 /* navbar */
 .nav {
     margin-left: 50px;
+    height: 110px;
+    z-index: 2000;
+    background-color: #fff;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
 }
 
 .nav-link {
@@ -16,7 +20,12 @@
 
 .navibar-brand {
     position: 'absolute';
+    text-align: center;
 
     margin: 30px auto;
 
+}
+
+.arrrigth {
+    margin-right: 50px;
 }

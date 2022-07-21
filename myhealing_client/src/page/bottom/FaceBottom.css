@@ -1,0 +1,11 @@
+.bottomimage {
+    text-align: right;
+    margin-right: 30px;
+}
+
+.circleimage {
+    width: 50px;
+    height: 50px;
+    border-radius: 70%;
+    margin: 5px;
+}
