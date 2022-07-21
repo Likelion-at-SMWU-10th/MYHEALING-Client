@@ -1,4 +1,23 @@
+.centerposition {
+     display: inline-flex;
+     align-items: center;
+}
+
 .rimg {
-    width:auto;
-    height:600px;
+  width: 45%;
+  height: auto;
+  margin-top: 90px;
+  margin-bottom: 40px;
+  margin-left: 160px;
   }
+
+.cap {
+  text-align: center;
+
+  color: black;
+  max-width: 40%;
+  height: auto;
+  margin-left: 120px;
+
+  
+}

@@ -32,7 +32,7 @@ const Menubar = () => {
             <img src="img/logo.png" width={190} height={40} alt="Logo"></img>
         </a>
 
-        <ul class="nav justify-content-end">
+        <ul class="nav justify-content-end arrrigth">
           <li class="nav-item">
               <LoginBtn text="Log in"/>
           </li>
