@@ -1,5 +1,7 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import './Menubar.css';
+import LoginBtn from "./component/LoginBtn";
 
 const Menubar = () => {
   return (
@@ -11,33 +13,31 @@ const Menubar = () => {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./map">
+          <a class="nav-link active" href="./map">
             장소 검색
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">
+          <a class="nav-link active" href="#">
             Community
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">
+          <a class="nav-link active" href="#">
             추억 남기기
           </a>
         </li>
 
-        <img src="img/logo.png" width={190} height={40} alt="Logo"></img>
+        <a class="navibar-brand" href="./home">
+            <img src="img/logo.png" width={190} height={40} alt="Logo"></img>
+        </a>
 
         <ul class="nav justify-content-end">
           <li class="nav-item">
-            <a class="nav-link active" href="./login">
-              (Log in)
-            </a>
+              <LoginBtn text="Log in"/>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">
-              (Register)
-            </a>
+            <LoginBtn text="Register"/>
           </li>
         </ul>
       </ul>

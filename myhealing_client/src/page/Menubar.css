@@ -1,0 +1,22 @@
+/* navbar */
+.nav {
+    margin-left: 50px;
+}
+
+.nav-link {
+    background-color: #ffffff;
+    border-color: #E7E7E7;
+    color: #73BD88;
+    font-size: 15px;
+
+    margin-top: 35px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.navibar-brand {
+    position: 'absolute';
+
+    margin: 30px auto;
+
+}
