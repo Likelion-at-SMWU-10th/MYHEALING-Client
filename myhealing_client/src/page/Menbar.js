@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import './Menubar.css';
+import "./Menubar.css";
 import LoginBtn from "./component/LoginBtn";
 
 const Menubar = () => {
@@ -23,21 +23,21 @@ const Menubar = () => {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#">
+          <a class="nav-link active" href="./mem">
             추억 남기기
           </a>
         </li>
 
         <a class="navibar-brand" href="./home">
-            <img src="img/logo.png" width={190} height={40} alt="Logo"></img>
+          <img src="img/logo.png" width={190} height={40} alt="Logo"></img>
         </a>
 
         <ul class="nav justify-content-end arrrigth">
           <li class="nav-item">
-              <LoginBtn text="Log in"/>
+            <LoginBtn text="Log in" />
           </li>
           <li class="nav-item">
-            <LoginBtn text="Register"/>
+            <LoginBtn text="Register" />
           </li>
         </ul>
       </ul>
