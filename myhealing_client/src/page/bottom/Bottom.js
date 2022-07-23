@@ -56,7 +56,7 @@ const SignupText = styled.div`
   font-family: "Comfortaa";
   font-weight: 400;
   font-style: normal;
-  font-size: 2.5vmin;
+  font-size: 2.7vmin;
   white-space: nowrap;
   overflow: hidden;
 `;
