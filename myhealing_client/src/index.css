@@ -39,3 +39,19 @@ code {
   font-weight: 500;
   src: url("styles/fonts/NotoSansKR.woff") format("woff");
 }
+
+/*Regular*/
+@font-face {
+  font-family: "Montserrat-Regular";
+  font-weight: normal;
+  src: local("Montserrat-Regular") url("styles/fonts/Montserrat-Regular.woff")
+    format("woff");
+}
+/*Bold*/
+@font-face {
+  font-family: "Montserrat-Bold";
+  font-style: normal;
+  font-weight: bold;
+  src: local("Montserrat-Bold") url("styles/fonts/Montserrat-Bold.woff")
+    format("woff");
+}
