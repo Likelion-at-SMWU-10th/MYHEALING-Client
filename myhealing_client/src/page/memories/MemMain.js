@@ -1,40 +1,56 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const MemMain = () => {
+  const navigate = useNavigate();
+  const GoRandom = () => {
+    navigate("/writerandom");
+  };
+  const GoToday = () => {
+    navigate("/writetoday");
+  };
+  const GoGuide = () => {
+    navigate("/writeguide");
+  };
+
   return (
     <Container>
-      <TopWrapper>
-        <RandomGuide>
-          <RandomTitle>랜덤 가이드 작성하기</RandomTitle>
-          <RandomList>
-            비 오는 날에 어울리는 카페 <br />
-            어색한 친구랑도 짱친이 될 수 있는 장소
-            <br />
-            나만 알고 싶은 술집 <br />
-            혼자 있고 싶을 때 가기 좋은 장소
-          </RandomList>
-        </RandomGuide>
-        <TodayMemories>
-          <TodayTitle>오늘의 추억 남기기</TodayTitle>
-          <TodayContent></TodayContent>
-        </TodayMemories>
-      </TopWrapper>
-      <BottomWrapper>
-        <LeafImg src={"/img/leaf.png"} />
-        <GuideBtn>가이드 작성하기</GuideBtn>
-      </BottomWrapper>
+      <Wrapper>
+        <TopWrapper>
+          <RandomGuide onClick={GoRandom}>
+            <RandomTitle>랜덤 가이드 작성하기</RandomTitle>
+            <RandomList>
+              비 오는 날에 어울리는 카페 <br />
+              어색한 친구랑도 짱친이 될 수 있는 장소
+              <br />
+              나만 알고 싶은 술집 <br />
+              혼자 있고 싶을 때 가기 좋은 장소
+            </RandomList>
+          </RandomGuide>
+          <TodayMemories onClick={GoToday}>
+            <TodayTitle>오늘의 추억 남기기</TodayTitle>
+            <TodayContent></TodayContent>
+          </TodayMemories>
+        </TopWrapper>
+        <BottomWrapper>
+          <LeafImg src={"/img/leaf.png"} />
+          <GuideBtn onClick={GoGuide}>가이드 작성하기</GuideBtn>
+        </BottomWrapper>
+      </Wrapper>
     </Container>
   );
 };
 
-const Container = styled.div`
+const Container = styled.div``;
+
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 80vh;
-  width: 1000px;
+  width: 145vmin;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const TopWrapper = styled.div`
@@ -43,7 +59,6 @@ const TopWrapper = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin: auto;
   width: 100%;
   height: 75%;
 `;
@@ -54,52 +69,60 @@ const RandomGuide = styled.div`
   width: 80rem;
   height: 17rem;
   border: 1px solid;
-  padding: 4rem;
+  padding: 3rem;
   margin: 10rem 2rem 5rem 8rem;
   text-align: left;
-  box-shadow: 0 0.3rem 0.3rem 0 #bdbdbd;
+  box-shadow: 0.3rem 0.3rem 0.3rem 0 #bdbdbd;
 `;
 
-const RandomTitle = styled.h5`
-  border-width: 1rem;
+const RandomTitle = styled.div`
+  font-family: "Mulish";
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding-bottom: 3vh;
 `;
 
-const RandomList = styled.div``;
+const RandomList = styled.div`
+  line-height: 3vh;
+`;
 
 const TodayMemories = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   width: 80rem;
   height: 17rem;
   border: 1px solid;
-  padding: 4rem;
+  padding: 3rem;
   margin: 10rem 8rem 5rem 2rem;
   text-align: left;
-  box-shadow: 0 0.3rem 0.3rem 0 #bdbdbd;
+  box-shadow: 0.3rem 0.3rem 0.3rem 0 #bdbdbd;
 `;
 
-const TodayTitle = styled.h5`
-  border-width: 1rem;
+const TodayTitle = styled.div`
+  font-family: "Mulish";
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding-bottom: 3vh;
 `;
-const TodayContent = styled.div``;
+const TodayContent = styled.div`
+  line-height: 3vh;
+`;
 
 const BottomWrapper = styled.div`
-  position: relative;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
+  justify-content: right;
   width: 100%;
   height: 25%;
 `;
 
 const LeafImg = styled.img`
-  height: 8vmin;
-  float: left;
-  white-space: nowrap;
-  overflow: hidden;
+  position: relative;
+  right: -2rem;
+  bottom: 2rem;
+  height: 5rem;
+  opacity: 0.7;
+  z-index: 1000;
 `;
 
 const GuideBtn = styled.button`
@@ -110,14 +133,13 @@ const GuideBtn = styled.button`
   border-radius: 0.5rem;
   background-color: #73bd88;
   font-family: "NotoSansKR";
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   color: #ffffff;
   box-shadow: 0 0.3rem 0.3rem 0 #bdbdbd;
-  padding-top: 0.8vh;
-  margin-right: 2vw;
-  margin-left: 2vw;
+  margin-right: 8rem;
+  text-align: center;
 `;
 
 export default MemMain;

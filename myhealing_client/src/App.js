@@ -5,6 +5,9 @@ import Menubar from "./page/Menbar";
 import MapMain from "./page/map/MapMain";
 import Login from "./page/login/Login";
 import MemMain from "./page/memories/MemMain";
+import WriteRandom from "./page/memories/WriteRandom";
+import WriteMemories from "./page/memories/WriteMemories";
+import WriteGuide from "./page/memories/WriteGuide";
 
 const App = () => {
   return (
@@ -15,6 +18,9 @@ const App = () => {
         <Route path="/mem" element={<MemMain />}></Route>
         <Route path="/login" element={<Login />}></Route>
       </Route>
+      <Route path="/writerandom" element={<WriteRandom />}></Route>
+      <Route path="/writetoday" element={<WriteMemories />}></Route>
+      <Route path="/writeguide" element={<WriteGuide />}></Route>
     </Routes>
   );
 };
