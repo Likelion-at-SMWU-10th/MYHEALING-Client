@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import AddressBtn from "./AddressBtn";
+
 /*포커스기능주기*/
 const WriteGuide = () => {
   return (
@@ -15,7 +17,7 @@ const WriteGuide = () => {
       <Wrapper>
         <MainTitle>가이드 작성하기</MainTitle>
         <Box>
-          <WriteAddress>주소 작성하기</WriteAddress>
+          <AddressBtn />
           <Title>
             <SubTitle>제목 : </SubTitle>
             <ContentTitle className="titleC" type="text"></ContentTitle>
@@ -93,9 +95,7 @@ const Box = styled.div`
   text-align: left;
   box-shadow: 0.3rem 0.3rem 0.3rem 0 #bdbdbd;
 `;
-const WriteAddress = styled.div`
-  margin: 2rem;
-`;
+
 const Title = styled.div`
   display: flex;
   flex-direction: row;
