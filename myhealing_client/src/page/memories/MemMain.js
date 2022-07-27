@@ -49,6 +49,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   height: 80vh;
   width: 145vmin;
+  min-width: 1100px;
   margin-left: auto;
   margin-right: auto;
 `;
@@ -80,6 +81,7 @@ const RandomTitle = styled.div`
   font-weight: 700;
   font-size: 1.5rem;
   padding-bottom: 3vh;
+  overflow: hidden;
 `;
 
 const RandomList = styled.div`

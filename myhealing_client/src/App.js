@@ -17,10 +17,10 @@ const App = () => {
         <Route path="/map" element={<MapMain />}></Route>
         <Route path="/mem" element={<MemMain />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/writerandom" element={<WriteRandom />}></Route>
+        <Route path="/writetoday" element={<WriteMemories />}></Route>
+        <Route path="/writeguide" element={<WriteGuide />}></Route>
       </Route>
-      <Route path="/writerandom" element={<WriteRandom />}></Route>
-      <Route path="/writetoday" element={<WriteMemories />}></Route>
-      <Route path="/writeguide" element={<WriteGuide />}></Route>
     </Routes>
   );
 };
