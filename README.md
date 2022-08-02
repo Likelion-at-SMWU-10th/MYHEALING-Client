@@ -7,4 +7,4 @@ Project local 에서 돌리려면 설치해야 하는 yarn list
 3. yarn add react-naver-maps
 4. yarn add react-router-dom
 5. yarn add @actbase/react-daum-postcode
-6. yarn add swiper@6.8.4  (아직 확정 아님!!) --> index.js strictMode 태그 삭제해야 작동
+6. yarn add swiper@6.8.4  (아직 확정 아님!!) --> index.js <React.StrictMode> 태그 삭제해야 작동
