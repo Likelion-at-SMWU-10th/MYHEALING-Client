@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./page/Home";
 import Menubar from "./page/Menbar";
 import MapMain from "./page/map/MapMain";
+import SearchPlace from "./page/map/SearchPlace";
 import Login from "./page/login/Login";
 import MemMain from "./page/memories/MemMain";
 import WriteRandom from "./page/memories/WriteRandom";
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/writerandom" element={<WriteRandom />}></Route>
         <Route path="/writetoday" element={<WriteMemories />}></Route>
         <Route path="/writeguide" element={<WriteGuide />}></Route>
+        <Route path="/searchplace" element={<SearchPlace />}></Route>
       </Route>
     </Routes>
   );

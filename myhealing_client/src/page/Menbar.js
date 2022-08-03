@@ -13,7 +13,7 @@ const Menubar = () => {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="./map">
+          <a class="nav-link active" href="./searchplace">
             장소 검색
           </a>
         </li>
