@@ -36,3 +36,9 @@ const FaceBottom = ({text}) => {
 };
 
 export default FaceBottom;
+
+/*
+<div className="bar"></div>
+            <div className="bottomText"> © MY_HEALING ! Join US ♡ </div>
+            
+*/

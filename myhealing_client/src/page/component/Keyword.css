@@ -1,20 +1,19 @@
 .btn_keyword {
     box-sizing: border-box;
-
-    display: flex;
-    padding: 6px 21px;
-    gap: 10px;
-
     position:relative;
-    width:fit-content;
-    height: 32px;
+    width: auto;
+    height: 30px;
+
+    display:inline-block;
 
     background: #FFFFFF;
-
     border: 1px solid #CECECE;
     border-radius: 18px;
 
     color: #a9a9a9;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 13px; 
+
+    text-align: center;
+    vertical-align: middle;
 }
