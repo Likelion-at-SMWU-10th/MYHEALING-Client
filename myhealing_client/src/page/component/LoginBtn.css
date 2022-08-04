@@ -7,12 +7,12 @@
     font-weight: 500;
     font-size: 15px;
     line-height: 18px;
-    display: flex;
+    display: inline-block;
     align-items: center;
     text-align: center;
     letter-spacing: -0.015em;
 
-    margin-top: 35px;
+    margin-top: 10px;
     margin-right: 10px;
     
     color: #73BD88;
