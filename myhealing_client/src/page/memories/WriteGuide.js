@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import AddressBtn from "./AddressBtn";
+import UploadPhoto from "./UploadPhoto";
 
 /*포커스기능주기*/
 const WriteGuide = () => {
+  // <ContentText> 글자수 제한
+  const [count, setCount] = useState("");
+  const onInput = (e) => {
+    const maxLength = 500;
+    if (e.target.value.length > maxLength) {
+      e.target.value = e.target.value.substr(0, maxLength);
+    }
+    setCount(e.target.value.length);
+  };
+
+  const [imageSrc, setImageSrc] = useState([]);
+
   return (
-    //   function counter() {
-    //     var content = document.getElementById('jasoseol').value;
-    //   if (content.length > 200) {
-    //     content = content.substring(0,200);
-    //     document.getElementById('jasoseol').value = content;
-    // }
-    //     document.getElementById('count').innerHTML = '(' + content.length + '/200)';
-    // }
     <Container>
       <Wrapper>
         <MainTitle>가이드 작성하기</MainTitle>
@@ -20,40 +25,36 @@ const WriteGuide = () => {
           <AddressBtn />
           <Title>
             <SubTitle>제목 : </SubTitle>
-            <ContentTitle className="titleC" type="text"></ContentTitle>
+            <ContentTitle type="text"></ContentTitle>
           </Title>
           <Date>
             <Sub>날짜</Sub>
-            <ContentDate className="titleC" type="text"></ContentDate>
+            <ContentDate type="text"></ContentDate>
           </Date>
           <Place>
             <Sub>방문한 장소명</Sub>
-            <ContentPlace className="titleC" type="text"></ContentPlace>
+            <ContentPlace type="text"></ContentPlace>
           </Place>
           <Expense>
             <Sub>지출 금액</Sub>
-            <ContentNum
-              className="titleC"
-              type="number"
-              placeholder="숫자로 작성"
-            ></ContentNum>
+            <ContentNum type="number" placeholder="숫자로 작성"></ContentNum>
           </Expense>
           <MainText>
             <SubText>본문</SubText>
-            <ContentText
-              className="titleC"
-              type="text"
-              placeholder="최대 @@@자"
-              rows="6"
-            ></ContentText>
+            <ContentWrapper>
+              <ContentText
+                type="text"
+                placeholder="최대 500자"
+                rows="6"
+                onInput={onInput}
+              ></ContentText>
+              <Counter>({count === "" ? 0 : count}/500)</Counter>
+            </ContentWrapper>
           </MainText>
-          <Photo>
-            <SubPhoto className="titleC" type="file" accept="image/*">
-              사진 첨부
-            </SubPhoto>
-            <InputPhoto></InputPhoto>
-          </Photo>
-          <SelectTag>태그 선택하기</SelectTag>
+          <UploadPhoto setImages={setImageSrc}></UploadPhoto>
+          <SelectTag>
+            <Sub>태그 선택하기</Sub>
+          </SelectTag>
         </Box>
         <BottomBtn>
           <CancelBtn>취소하기</CancelBtn>
@@ -88,7 +89,7 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   width: 40rem;
-  height: 40rem;
+  height: auto;
   margin: 0 auto 0 auto;
   border: 1px solid;
   padding: 1rem;
@@ -148,6 +149,7 @@ const Expense = styled.div`
   width: 40rem;
 `;
 const ContentNum = styled.input`
+  outline-style: none;
   border: none;
   margin: 0.44rem auto 2rem 0rem;
 `;
@@ -159,17 +161,26 @@ const MainText = styled.div`
 const SubText = styled.div`
   margin: 0.5rem 0.5rem 0rem 2rem;
 `;
-const ContentText = styled.textarea`
-  border: none;
-  margin: 0.4rem auto 2rem 0rem;
-  resize: none;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 80%;
+  align-content: space-between;
 `;
-const Photo = styled.div``;
-const SubPhoto = styled.button``;
-const InputPhoto = styled.input`
-  display: none;
+const ContentText = styled.textarea`
+  outline-style: none;
+  border: none;
+  margin: 0.4rem auto 0rem 0rem;
+  resize: none;
+  width: 100%;
 `;
+
+const Counter = styled.div`
+  text-align: right;
+  color: #73bd88;
+`;
+
 const SelectTag = styled.div``;
 const BottomBtn = styled.div`
   position: relative;
