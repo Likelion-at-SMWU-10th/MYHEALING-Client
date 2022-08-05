@@ -1,10 +1,16 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import AddressBtn from "./AddressBtn";
 import UploadPhoto from "./UploadPhoto";
+import TagModal from "./TagModal";
+import KeywordGroup from "./KeywordGroup";
+import { HiOutlineHashtag } from "react-icons/hi";
 
 /*포커스기능주기*/
+
 const WriteGuide = () => {
+  const navigate = useNavigate();
   // <ContentText> 글자수 제한
   const [count, setCount] = useState("");
   const onInput = (e) => {
@@ -14,9 +20,18 @@ const WriteGuide = () => {
     }
     setCount(e.target.value.length);
   };
-
+  // 사진 첨부
   const [imageSrc, setImageSrc] = useState([]);
 
+  // 모달창
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
   return (
     <Container>
       <Wrapper>
@@ -53,11 +68,23 @@ const WriteGuide = () => {
           </MainText>
           <UploadPhoto setImages={setImageSrc}></UploadPhoto>
           <SelectTag>
-            <Sub>태그 선택하기</Sub>
+            <Sub>
+              <TagDiv>
+                <HiOutlineHashtag size="19" color="#73bd88" />
+                <TagBtn onClick={openModal}>태그 선택</TagBtn>
+              </TagDiv>
+              <TagModal
+                open={modalOpen}
+                close={closeModal}
+                header="키워드로 맞춤 장소 찾기"
+              >
+                <KeywordGroup />
+              </TagModal>
+            </Sub>
           </SelectTag>
         </Box>
         <BottomBtn>
-          <CancelBtn>취소하기</CancelBtn>
+          <CancelBtn onClick={() => navigate(-1)}>취소하기</CancelBtn>
           <SubmitBtn>저장하기</SubmitBtn>
         </BottomBtn>
       </Wrapper>
@@ -181,7 +208,26 @@ const Counter = styled.div`
   color: #73bd88;
 `;
 
-const SelectTag = styled.div``;
+const SelectTag = styled.div`
+  margin-bottom: 1rem;
+`;
+
+const TagDiv = styled.div`
+  &:hover {
+  }
+  &:active {
+    padding-left: 10px;
+  }
+`;
+
+const TagBtn = styled.button`
+  background-color: #ffffff;
+  border: none;
+  color: #73bd88;
+  border-radius: 0.5rem;
+  margin-left: 5px;
+`;
+
 const BottomBtn = styled.div`
   position: relative;
   display: flex;
@@ -212,6 +258,11 @@ const CancelBtn = styled.button`
   box-shadow: 0 0.3rem 0.3rem 0 #bdbdbd;
   padding-top: 0.8vh;
   margin-right: 0.2rem;
+
+  &:hover {
+    background-color: #73bd88;
+    color: #ffffff;
+  }
 `;
 const SubmitBtn = styled.button`
   display: flex;
@@ -231,6 +282,11 @@ const SubmitBtn = styled.button`
   box-shadow: 0 0.3rem 0.3rem 0 #bdbdbd;
   padding-top: 0.8vh;
   margin-left: 0.2rem;
+
+  &:hover {
+    background-color: #73bd88;
+    color: #ffffff;
+  }
 `;
 
 export default WriteGuide;

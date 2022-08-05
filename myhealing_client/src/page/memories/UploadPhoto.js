@@ -7,7 +7,7 @@ import "swiper/components/navigation/navigation.min.css";
 import "swiper/components/pagination/pagination.min.css";
 import SwiperCore, { Navigation, Pagination } from "swiper";
 
-import { GrGallery } from "react-icons/gr";
+import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -65,8 +65,10 @@ const UploadPhoto = () => {
       </Wrapper>
       <div>
         <AddLabel htmlFor="input-file" onChange={addImg}>
-          <GrGallery />
-          <Ptag>사진 첨부</Ptag>
+          <PDiv>
+            <MdOutlineAddPhotoAlternate size="19" color="#73bd88" />
+            <Ptag>사진 첨부</Ptag>
+          </PDiv>
           <input
             type="file"
             multiple
@@ -149,18 +151,18 @@ const DeleteBtn = styled.button`
 `;
 
 const AddLabel = styled.label`
+  margin-left: 1.1rem;
   margin-top: 10px;
   padding: 6px 15px;
   color: black;
   cursor: pointer;
-  margin-bottom: 30px;
-
+`;
+const PDiv = styled.div`
   &:hover {
-    padding-left: 1px;
   }
 
   &:active {
-    padding-left: 1px;
+    padding-left: 10px;
   }
 `;
 
