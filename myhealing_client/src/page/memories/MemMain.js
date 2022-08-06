@@ -30,7 +30,14 @@ const MemMain = () => {
           </RandomGuide>
           <TodayMemories onClick={GoToday}>
             <TodayTitle>오늘의 추억 남기기</TodayTitle>
-            <TodayContent></TodayContent>
+            <TodayContent>
+              <br />
+              추억 남기기 기능을 통해
+              <br />
+              본인이 방문한 장소의 후기 뿐만 아니라,
+              <br />
+              일기처럼 하루를 기록하세요!
+            </TodayContent>
           </TodayMemories>
         </TopWrapper>
         <BottomWrapper>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import AddressBtn from "./AddressBtn";
+import Address from "./Address";
 import UploadPhoto from "./UploadPhoto";
 import TagModal from "./TagModal";
 import KeywordGroup from "./KeywordGroup";
@@ -37,7 +37,7 @@ const WriteGuide = () => {
       <Wrapper>
         <MainTitle>가이드 작성하기</MainTitle>
         <Box>
-          <AddressBtn />
+          <Address />
           <Title>
             <SubTitle>제목 : </SubTitle>
             <ContentTitle type="text"></ContentTitle>
