@@ -10,6 +10,12 @@ import { HiOutlineHashtag } from "react-icons/hi";
 /*포커스기능주기*/
 
 const WriteGuide = () => {
+  //태그
+  const [tags, setTags] = useState([]);
+  const getTag = (gtags) => {
+    setTags([...tags, gtags]);
+  };
+
   const navigate = useNavigate();
   // <ContentText> 글자수 제한
   const [count, setCount] = useState("");
@@ -78,9 +84,10 @@ const WriteGuide = () => {
                 close={closeModal}
                 header="키워드로 맞춤 장소 찾기"
               >
-                <KeywordGroup />
+                <KeywordGroup tags={tags} getTag={getTag} />
               </TagModal>
             </Sub>
+            <Tags>{tags}</Tags>
           </SelectTag>
         </Box>
         <BottomBtn>
@@ -209,6 +216,8 @@ const Counter = styled.div`
 `;
 
 const SelectTag = styled.div`
+  display: flex;
+  flex-direction: row;
   margin-bottom: 1rem;
 `;
 
@@ -226,6 +235,12 @@ const TagBtn = styled.button`
   color: #73bd88;
   border-radius: 0.5rem;
   margin-left: 5px;
+`;
+
+const Tags = styled.div`
+  margin-top: 0.6rem;
+  margin-left: 1rem;
+  border: 1px solid black;
 `;
 
 const BottomBtn = styled.div`

@@ -1,5 +1,5 @@
-import React from "react";
-import './Keyword.css';
+import React, { useState } from "react";
+import "./Keyword.css";
 
 const Keyword = ({text}) => {
     return (
