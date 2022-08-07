@@ -4,11 +4,11 @@ import "./KeywordGroup.css";
 
 const KeywordGroup = () => {
   return (
-    <div class="container">
-      <div class="row mt-5">
-        <div class="col">
-          <div class="row row-cols-1">
-            <div class="col ">
+    <div className="container">
+      <div className="row mt-5">
+        <div className="col">
+          <div className="row row-cols-1">
+            <div className="col ">
               <div className="topname">
                 <img
                   className="keywordicon"
@@ -30,7 +30,7 @@ const KeywordGroup = () => {
                 </div>
               </div>
             </div>
-            <div class="col">
+            <div className="col">
               <div className="topname">
                 <img
                   className="keywordicon"
@@ -51,9 +51,9 @@ const KeywordGroup = () => {
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class="row row-cols-1">
-            <div class="col">
+        <div className="col">
+          <div className="row row-cols-1">
+            <div className="col">
               <div className="topname">
                 <img
                   className="keywordicon"
@@ -72,7 +72,7 @@ const KeywordGroup = () => {
                 <Keyword text={"바람부는"} />
               </div>
             </div>
-            <div class="col ">
+            <div className="col ">
               <div className="topname">
                 <img
                   className="keywordicon"
@@ -95,7 +95,7 @@ const KeywordGroup = () => {
             </div>
           </div>
         </div>
-        <div class="col">
+        <div className="col">
           <div className="topname">
             <img
               className="keywordicon"

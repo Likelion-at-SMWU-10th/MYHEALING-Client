@@ -4,7 +4,7 @@ import './LoginBtn.css';
 const LoginBtn = ({text}) => {
     return (
         <>
-            <a class="loginbtn btn-default" href="./login" role="button">
+            <a className="loginbtn btn-default" href="./login" role="button">
                 {text}
             </a>
         </>
