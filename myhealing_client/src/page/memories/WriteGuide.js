@@ -6,10 +6,49 @@ import UploadPhoto from "./UploadPhoto";
 import TagModal from "./TagModal";
 import KeywordGroup from "./KeywordGroup";
 import { HiOutlineHashtag } from "react-icons/hi";
+import axios from "axios";
 
 /*포커스기능주기*/
 
-const WriteGuide = () => {
+const WriteGuide = (apiUrl) => {
+  //api 연결
+  const [inputs, setInputs] = useState({
+    create_id: "",
+    date: "",
+    place: "",
+    cost: "",
+    title: "",
+    body: "",
+    address: "",
+    thumbnail: "",
+  });
+
+  //동시에 관리하기 위한 객체 만들어주기
+  const { create_id, date, place, cost, title, body, address, thumbnail } =
+    inputs;
+
+  //onChange 함수 만들어주기
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
+  const onSubmit = () => {
+    axios
+      .post(`${apiUrl}guide/`, {
+        creator_id: 20,
+        date: inputs.date,
+        place: inputs.place,
+        title: inputs.title,
+        contents: inputs.contents,
+        repls: [],
+      })
+      .then(() => {
+        navigate("../");
+      });
+  };
   //태그
   const [tags, setTags] = useState([]);
   const getTag = (gtags) => {

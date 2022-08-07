@@ -11,6 +11,7 @@ import WriteMemories from "./page/memories/WriteMemories";
 import WriteGuide from "./page/memories/WriteGuide";
 import SearchPlaceByName from "./page/map/SearchPlaceByName";
 
+const apiUrl = "http://127.0.0.1:8000/";
 const App = () => {
   return (
     <Routes>
@@ -19,11 +20,17 @@ const App = () => {
         <Route path="/map" element={<MapMain />}></Route>
         <Route path="/mem" element={<MemMain />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/writerandom" element={<WriteRandom />}></Route>
+        <Route
+          path="/writerandom"
+          element={<WriteRandom apiUrl={apiUrl} />}
+        ></Route>
         <Route path="/writetoday" element={<WriteMemories />}></Route>
         <Route path="/writeguide" element={<WriteGuide />}></Route>
         <Route path="/searchplace" element={<SearchPlace />}></Route>
-        <Route path="/searchplacebyname" element={<SearchPlaceByName />}></Route>
+        <Route
+          path="/searchplacebyname"
+          element={<SearchPlaceByName />}
+        ></Route>
       </Route>
     </Routes>
   );
