@@ -142,7 +142,9 @@ function SearchPlace() {
           </div>
         </div>
       </div>
-      <div></div>
+      <form>
+          <a href="/searchplacebyname">검색하기</a>
+      </form>
     </>
   );
 }

@@ -9,6 +9,7 @@ import MemMain from "./page/memories/MemMain";
 import WriteRandom from "./page/memories/WriteRandom";
 import WriteMemories from "./page/memories/WriteMemories";
 import WriteGuide from "./page/memories/WriteGuide";
+import SearchPlaceByName from "./page/map/SearchPlaceByName";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/writetoday" element={<WriteMemories />}></Route>
         <Route path="/writeguide" element={<WriteGuide />}></Route>
         <Route path="/searchplace" element={<SearchPlace />}></Route>
+        <Route path="/searchplacebyname" element={<SearchPlaceByName />}></Route>
       </Route>
     </Routes>
   );
