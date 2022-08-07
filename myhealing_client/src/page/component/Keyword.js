@@ -4,7 +4,7 @@ import './Keyword.css';
 const Keyword = ({text}) => {
     return (
         <>
-            <button type="button" class="btn btn-outline-secondary btn_keyword"> {text}</button>
+            <button type="button" className="btn btn-outline-secondary btn_keyword"> {text}</button>
         </>
     );
 };

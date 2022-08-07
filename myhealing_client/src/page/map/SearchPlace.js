@@ -12,11 +12,11 @@ function SearchPlace() {
         </form>
       </div>
       <Inform text={"키워드로 맞춤 장소 찾기"} />
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div class="row row-cols-1">
-              <div class="col">
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <div className="row row-cols-1">
+              <div className="col">
                 <div className="topname">
                   <img
                     className="keywordicon"
@@ -38,7 +38,7 @@ function SearchPlace() {
                   </div>
                 </div>
               </div>
-              <div class="col">
+              <div className="col">
                 <div className="topname">
                   <img
                     className="keywordicon"
@@ -59,9 +59,9 @@ function SearchPlace() {
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="row row-cols-1">
-              <div class="col">
+          <div className="col">
+            <div className="row row-cols-1">
+              <div className="col">
                 <div className="topname">
                   <img
                     className="keywordicon"
@@ -80,7 +80,7 @@ function SearchPlace() {
                   <Keyword text={"바람부는"} />
                 </div>
               </div>
-              <div class="col">
+              <div className="col">
                 <div className="topname">
                   <img
                     className="keywordicon"
@@ -103,7 +103,7 @@ function SearchPlace() {
               </div>
             </div>
           </div>
-          <div class="col">
+          <div className="col">
             <div className="topname">
               <img
                 className="keywordicon"

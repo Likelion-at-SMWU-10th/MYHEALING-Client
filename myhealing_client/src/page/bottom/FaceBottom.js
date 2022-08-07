@@ -5,61 +5,61 @@ const FaceBottom = ({text}) => {
     return (
         <>
 
-            <div class="container_bottom">
-                <div class="row">
-                    <div class="col">
-                        <div class="row row-cols-1">
-                            <div class="col">
+            <div className="container_bottom">
+                <div className="row">
+                    <div className="col">
+                        <div className="row row-cols-1">
+                            <div className="col">
                                 <b>Thanks to</b>
                             </div>
                             <div>
                                 .
                             </div>
-                            <div class="col">
+                            <div className="col">
                                 Team. HEALING
                             </div>
-                            <div class="col">
+                            <div className="col">
                                 Likelion 10th
                             </div>
-                            <div class="col">
+                            <div className="col">
                                 SMU
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="row row-cols-1">
-                            <div class="col">
+                    <div className="col">
+                        <div className="row row-cols-1">
+                            <div className="col">
                                 <b>Community</b>
                             </div>
                             <div>
                                 .
                             </div>
-                            <div class="col">
+                            <div className="col">
                                 insta
                             </div>
-                            <div class="col">
+                            <div className="col">
                                 Notion
                             </div>
-                            <div class="col">
+                            <div className="col">
                                 gmail
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="row row-cols-1">
-                            <div class="col">
+                    <div className="col">
+                        <div className="row row-cols-1">
+                            <div className="col">
                                 <b>Company</b>
                             </div>
                             <div>
                                 .
                             </div>
-                            <div class="col">
+                            <div className="col">
                                 About us
                             </div>
-                            <div class="col">
+                            <div className="col">
                                 Contact us
                             </div>
-                            <div class="col">
+                            <div className="col">
                                 History
                             </div>
                         </div>

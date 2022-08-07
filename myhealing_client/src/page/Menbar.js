@@ -6,33 +6,33 @@ import LoginBtn from "./component/LoginBtn";
 const Menubar = () => {
   return (
     <div>
-      <ul class="nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="./home">
+      <ul className="nav">
+        <li className="nav-item">
+          <a className="nav-link active" aria-current="page" href="./home">
             서비스 소개
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="./searchplace">
+        <li className="nav-item">
+          <a className="nav-link active" href="./searchplace">
             장소 검색
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="#">
+        <li className="nav-item">
+          <a className="nav-link active" href="#">
             Community
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="./mem">
+        <li className="nav-item">
+          <a className="nav-link active" href="./mem">
             추억 남기기
           </a>
         </li>
 
-        <a class="navibar-brand" href="./home">
+        <a className="navibar-brand" href="./home">
           <img src="img/logo.png" width={190} height={40} alt="Logo"></img>
         </a>
 
-        <li class="nav-item">
+        <li className="nav-item">
           <LoginBtn text="Log in" />
         </li>
       </ul>
