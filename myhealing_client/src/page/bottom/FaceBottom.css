@@ -1,4 +1,14 @@
+.container_bottom {
+    position: absolute;
+    right: 0px;
+    width: 40%;
+    padding: 10px;
+}
+
+
 .bottomimage {
+    display: block;
+    
     text-align: right;
     margin-right: 30px;
 }
@@ -36,4 +46,31 @@
     height: 1px;
 
     background: rgba(0, 0, 0, 0.5);
+}
+
+.followus {
+    text-align: right;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 24px;
+}
+
+.companyinfo {
+    text-align: left;
+    margin-left: 30px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 24px;
+}
+
+.col {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
 }
