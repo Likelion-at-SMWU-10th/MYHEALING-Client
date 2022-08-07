@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Address from "./Address";
@@ -6,25 +6,23 @@ import UploadPhoto from "./UploadPhoto";
 import TagModal from "./TagModal";
 import KeywordGroup from "./KeywordGroup";
 import { HiOutlineHashtag } from "react-icons/hi";
+import axios from "axios";
 
-const WriteRandom = () => {
+const WriteRandom = ({ apiUrl }) => {
+  // api
+  const [title, setTitle] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`${apiUrl}guide/randomguide/`)
+      .then((response) => {
+        setTitle(response.data.title);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
   // 랜덤 제목
-  const randomTitle = [
-    "비 오는 날에 어울리는 카페",
-    "어색한 친구랑도 짱친이 될 수 있는 장소",
-    "나만 알고 싶은 술집",
-    "혼자 있고 싶을 때 가기 좋은 장소",
-    "내가 보장하는 서울 맛집",
-    "여름과 어울리는 장소",
-    "생각 정리하러 가기 좋은 곳",
-    "혼밥하기 좋은 곳",
-  ];
-  const CTitle = (array) => {
-    const random = Math.floor(Math.random() * array.length);
-    return array[random];
-  };
-
-  let rTitle = CTitle(randomTitle);
 
   const navigate = useNavigate();
   // <ContentText> 글자수 제한
@@ -56,7 +54,7 @@ const WriteRandom = () => {
           <Address />
           <Title>
             <SubTitle>제목 : </SubTitle>
-            <ContentTitle>{rTitle}</ContentTitle>
+            <ContentTitle>{title}</ContentTitle>
           </Title>
           <Date>
             <Sub>날짜</Sub>
