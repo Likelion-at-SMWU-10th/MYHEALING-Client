@@ -1,4 +1,5 @@
 import React from "react";
+import "./TagModal.css";
 
 const AddressModal = (props) => {
   const { open, close, header } = props;

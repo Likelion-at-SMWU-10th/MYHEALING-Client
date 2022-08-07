@@ -2,7 +2,11 @@ import React from "react";
 import Keyword from "../component/Keyword";
 import "./KeywordGroup.css";
 
-const KeywordGroup = () => {
+const KeywordGroup = ({ tags, getTag }) => {
+  const clickTag = (e) => {
+    console.log(e.target.value);
+    getTag(e.target.value);
+  };
   return (
     <div className="container">
       <div className="row mt-5">
@@ -19,8 +23,12 @@ const KeywordGroup = () => {
               </div>
               <div>
                 <div className="flex-container">
-                  <Keyword text={"활발한"} />
-                  <Keyword text={"조용한"} />
+                  <button value={"활발한"} onClick={clickTag}>
+                    활발한
+                  </button>
+                  <button value={"조용한"} onClick={clickTag}>
+                    조용한
+                  </button>
                   <Keyword text={"따스한"} />
                 </div>
                 <div className="flex-container">
