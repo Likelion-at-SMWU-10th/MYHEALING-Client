@@ -18,7 +18,7 @@ const TagBtn = (props) => {
             <main>{props.children}</main>
             <footer>
               <button className="close" onClick={close}>
-                close
+                확인
               </button>
             </footer>
           </section>

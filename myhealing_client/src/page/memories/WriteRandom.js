@@ -25,6 +25,21 @@ const WriteRandom = ({ apiUrl }) => {
   // 랜덤 제목
 
   const navigate = useNavigate();
+
+  //태그
+  const [tags, setTags] = useState([]);
+  const [tagTrue, setTagTrue] = useState(false);
+  const getTag = (gtags) => {
+    setTags([...tags, gtags]);
+    setTagTrue(true);
+  };
+
+  const resetTag = (e) => {
+    const copyMyTag = [];
+    setTags(copyMyTag);
+    setTagTrue(false);
+  };
+
   // <ContentText> 글자수 제한
   const [count, setCount] = useState("");
   const onInput = (e) => {
@@ -92,9 +107,17 @@ const WriteRandom = ({ apiUrl }) => {
                 close={closeModal}
                 header="키워드로 맞춤 장소 찾기"
               >
-                <KeywordGroup />
+                <KeywordGroup tags={tags} getTag={getTag} />
               </TagModal>
             </Sub>
+            <Tags>
+              {tags.map((tag) => (
+                <TagList tag={tag} key={tag}>
+                  {tag}
+                </TagList>
+              ))}
+              {tagTrue ? <Reset onClick={resetTag}>x</Reset> : null}
+            </Tags>
           </SelectTag>
         </Box>
         <BottomBtn>
@@ -223,6 +246,8 @@ const Counter = styled.div`
 `;
 
 const SelectTag = styled.div`
+  display: flex;
+  flex-direction: row;
   margin-bottom: 1rem;
 `;
 
@@ -240,6 +265,38 @@ const TagBtn = styled.button`
   color: #73bd88;
   border-radius: 0.5rem;
   margin-left: 5px;
+`;
+
+const Tags = styled.div`
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.6rem;
+  flex-wrap: wrap;
+`;
+
+const Reset = styled.button`
+  position: relative;
+  top: -0.6rem;
+  border: none;
+  background-color: #ffffff;
+  color: #73bd88;
+  padding: 0.5rem;
+`;
+
+const TagList = styled.div`
+  margin-bottom: 1rem;
+  margin-right: 0.5rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+  color: #999999;
+  border: 1px solid #cecece;
+  border-radius: 20px;
+  font-size: small;
 `;
 
 const BottomBtn = styled.div`
