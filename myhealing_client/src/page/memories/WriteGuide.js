@@ -35,27 +35,37 @@ const WriteGuide = (apiUrl) => {
       [name]: value,
     });
   };
+  const navigate = useNavigate();
   const onSubmit = () => {
     axios
       .post(`${apiUrl}guide/`, {
         creator_id: 20,
         date: inputs.date,
         place: inputs.place,
+        cost: inputs.cost,
         title: inputs.title,
-        contents: inputs.contents,
-        repls: [],
+        body: inputs.body,
+        address: inputs.address,
+        thumbnail: inputs.thumbnail,
       })
       .then(() => {
-        navigate("../");
+        window.location.reload();
       });
   };
   //태그
   const [tags, setTags] = useState([]);
+  const [tagTrue, setTagTrue] = useState(false);
   const getTag = (gtags) => {
     setTags([...tags, gtags]);
+    setTagTrue(true);
   };
 
-  const navigate = useNavigate();
+  const resetTag = (e) => {
+    const copyMyTag = [];
+    setTags(copyMyTag);
+    setTagTrue(false);
+  };
+
   // <ContentText> 글자수 제한
   const [count, setCount] = useState("");
   const onInput = (e) => {
@@ -82,22 +92,43 @@ const WriteGuide = (apiUrl) => {
       <Wrapper>
         <MainTitle>가이드 작성하기</MainTitle>
         <Box>
-          <Address />
+          <Address address={address} onChange={onChange} />
           <Title>
             <SubTitle>제목 : </SubTitle>
-            <ContentTitle type="text"></ContentTitle>
+            <ContentTitle
+              type="text"
+              name="title"
+              value={title}
+              onChange={onChange}
+            ></ContentTitle>
           </Title>
           <Date>
             <Sub>날짜</Sub>
-            <ContentDate type="text"></ContentDate>
+            <ContentDate
+              type="text"
+              name="date"
+              value={date}
+              onChange={onChange}
+            ></ContentDate>
           </Date>
           <Place>
             <Sub>방문한 장소명</Sub>
-            <ContentPlace type="text"></ContentPlace>
+            <ContentPlace
+              type="text"
+              name="place"
+              value={place}
+              onChange={onChange}
+            ></ContentPlace>
           </Place>
           <Expense>
             <Sub>지출 금액</Sub>
-            <ContentNum type="number" placeholder="숫자로 작성"></ContentNum>
+            <ContentNum
+              type="number"
+              placeholder="숫자로 작성"
+              name="cost"
+              value={cost}
+              onChange={onChange}
+            ></ContentNum>
           </Expense>
           <MainText>
             <SubText>본문</SubText>
@@ -107,6 +138,9 @@ const WriteGuide = (apiUrl) => {
                 placeholder="최대 500자"
                 rows="6"
                 onInput={onInput}
+                name="body"
+                value={body}
+                onChange={onChange}
               ></ContentText>
               <Counter>({count === "" ? 0 : count}/500)</Counter>
             </ContentWrapper>
@@ -126,12 +160,19 @@ const WriteGuide = (apiUrl) => {
                 <KeywordGroup tags={tags} getTag={getTag} />
               </TagModal>
             </Sub>
-            <Tags>{tags}</Tags>
+            <Tags>
+              {tags.map((tag) => (
+                <TagList tag={tag} key={tag}>
+                  {tag}
+                </TagList>
+              ))}
+              {tagTrue ? <Reset onClick={resetTag}>x</Reset> : null}
+            </Tags>
           </SelectTag>
         </Box>
         <BottomBtn>
           <CancelBtn onClick={() => navigate(-1)}>취소하기</CancelBtn>
-          <SubmitBtn>저장하기</SubmitBtn>
+          <SubmitBtn onSubmit={onSubmit}>저장하기</SubmitBtn>
         </BottomBtn>
       </Wrapper>
     </Container>
@@ -277,9 +318,35 @@ const TagBtn = styled.button`
 `;
 
 const Tags = styled.div`
-  margin-top: 0.6rem;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
   margin-left: 1rem;
-  border: 1px solid black;
+  margin-top: 0.5rem;
+  margin-bottom: 1.6rem;
+  flex-wrap: wrap;
+`;
+
+const Reset = styled.button`
+  position: relative;
+  top: -0.6rem;
+  border: none;
+  background-color: #ffffff;
+  color: #73bd88;
+  padding: 0.5rem;
+`;
+
+const TagList = styled.div`
+  margin-bottom: 1rem;
+  margin-right: 0.5rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+  color: #999999;
+  border: 1px solid #cecece;
+  border-radius: 20px;
+  font-size: small;
 `;
 
 const BottomBtn = styled.div`

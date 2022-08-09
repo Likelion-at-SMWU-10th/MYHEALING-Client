@@ -86,3 +86,8 @@
     opacity: 1;
   }
 }
+
+.close {
+  width: 70px;
+  margin-right: 1rem;
+}
