@@ -185,7 +185,14 @@ function SearchPlace() {
             <Option>[모든 검색어]</Option>
             <Option>[제목만]</Option>
             <Option>[내용만]</Option>
+            <img className="sampleImg" src="img/search/sampleimage.png" />
           </SerachSide>
+          <SearchHistory>동작구</SearchHistory>
+          <SearchHistory>광화문</SearchHistory>
+          <SearchHistory>용산구</SearchHistory>
+          <SearchHistory></SearchHistory>
+          <SearchHistory></SearchHistory>
+          <SearchHistory></SearchHistory>
         </div>
       </div>
     </>
@@ -246,7 +253,7 @@ const SubTitle = styled.div`
   flex-grow: 0
 `;
 
-const Option = styled.div`
+const Option = styled.button`
   width: 265px;
   height: 37px;
 
@@ -262,7 +269,8 @@ const Option = styled.div`
 
   color: #000000;
   margin-left:20px;
-
+  background: rgba(255, 255, 255, 0.4);
+  border:0px;
 
   /* Inside auto layout */
 
@@ -271,5 +279,28 @@ const Option = styled.div`
   flex-grow: 0;
 `;
 
+const SearchHistory = styled.button`
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height:50px;
+
+  top:0px;
+  left: 400px;
+
+  display:flex;
+  justify-content: center;
+
+  color: #000000;
+
+  margin: 0 auto;
+  width: 470px;
+  height: 50px;
+  background: #FFFFFF;
+
+  border: 1px solid #E3E3E3;
+
+`;
 
 export default SearchPlace
