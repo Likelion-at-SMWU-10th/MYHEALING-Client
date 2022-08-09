@@ -15,8 +15,8 @@ function SearchPlaceByName() {
               </input>
             </form>
         </p>
-        <Inform text={"'광화문'에 대한 검색 결과"} />
         <div className="container">
+          <Inform text={"'광화문'에 대한 검색 결과"} />
           <div className="row">
             <div className="col">
                 <div className="row row-cols-1">
