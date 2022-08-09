@@ -31,8 +31,9 @@ function SearchPlace() {
 
   const searchFunction = (event) => {
     event.preventDefault();
-    navigate("/searchplacebyname");
-    console.log("submit");
+   // navigate("/searchplacebyname");
+    navigate("/searchlist");
+    console.log('submit');
   };
 
   return (

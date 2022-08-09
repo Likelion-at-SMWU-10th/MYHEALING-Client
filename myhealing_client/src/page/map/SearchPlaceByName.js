@@ -8,13 +8,13 @@ import './SearchPlace.css';
 function SearchPlaceByName() {
   return (
       <>
-        <p>
+        <div>
             <form>
               <input className="input-group mb-3 topsearchbox">
                 
               </input>
             </form>
-        </p>
+        </div>
         <div className="container">
           <Inform text={"'광화문'에 대한 검색 결과"} />
           <div className="row">
