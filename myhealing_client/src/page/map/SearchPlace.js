@@ -4,7 +4,7 @@ import Inform from "./Inform";
 import styled from "styled-components";
 import "./SearchPlace.css";
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function SearchPlace() {
   const navigate = useNavigate();
@@ -12,41 +12,41 @@ function SearchPlace() {
   const [activeColor, setActiveColor] = useState({
     keyword: false,
   });
-  
+
   const { keyword } = activeColor;
 
-  const handleFocusColor = color => {
+  const handleFocusColor = (color) => {
     setActiveColor({
       ...activeColor,
       [color]: true,
     });
   };
 
-  const handleBlurColor = color => {
+  const handleBlurColor = (color) => {
     setActiveColor({
       ...activeColor,
       [color]: false,
     });
   };
 
-  const searchFunction = () => {
+  const searchFunction = (event) => {
     event.preventDefault();
     navigate("/searchplacebyname");
-    console.log('submit');
+    console.log("submit");
   };
 
   return (
     <>
-      <div className={keyword ? 'greensearch' : 'whitesearch'}>
+      <div className={keyword ? "greensearch" : "whitesearch"}>
         <form onSubmit={() => searchFunction()}>
           <input
-              className='input-group mb-3 topsearchbox'
-              onFocus={() => handleFocusColor('keyword')}
-              onBlur={() => handleBlurColor('keyword')}
-            ></input>
+            className="input-group mb-3 topsearchbox"
+            onFocus={() => handleFocusColor("keyword")}
+            onBlur={() => handleBlurColor("keyword")}
+          ></input>
         </form>
-        
-        <div className={keyword ? 'container chidden' : 'container'}>
+
+        <div className={keyword ? "container chidden" : "container"}>
           <Inform text={"키워드로 맞춤 장소 찾기"} />
           <div className="row">
             <div className="col">
@@ -178,7 +178,7 @@ function SearchPlace() {
           </div>
         </div>
 
-        <div className={keyword ? 'container' : 'container chidden'}>
+        <div className={keyword ? "container" : "container chidden"}>
           <SerachSide>
             <Title>검색 필터 설정</Title>
             <SubTitle>모든 검색어/ 제목만 / 내용만</SubTitle>
@@ -215,7 +215,7 @@ const Title = styled.div`
   width: 316px;
   height: 72px;
 
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
   font-size: 22px;
@@ -224,7 +224,6 @@ const Title = styled.div`
 
   color: #000000;
   margin-left: 20px;
-
 
   /* Inside auto layout */
 
@@ -237,7 +236,7 @@ const SubTitle = styled.div`
   width: 316px;
   height: 64px;
 
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -250,14 +249,14 @@ const SubTitle = styled.div`
 
   flex: none;
   order: 1;
-  flex-grow: 0
+  flex-grow: 0;
 `;
 
 const Option = styled.button`
   width: 265px;
   height: 37px;
 
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 900;
   font-size: 14px;
@@ -268,9 +267,9 @@ const Option = styled.button`
   align-items: center;
 
   color: #000000;
-  margin-left:20px;
+  margin-left: 20px;
   background: rgba(255, 255, 255, 0.4);
-  border:0px;
+  border: 0px;
 
   /* Inside auto layout */
 
@@ -280,16 +279,16 @@ const Option = styled.button`
 `;
 
 const SearchHistory = styled.button`
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
-  line-height:50px;
+  line-height: 50px;
 
-  top:0px;
+  top: 0px;
   left: 400px;
 
-  display:flex;
+  display: flex;
   justify-content: center;
 
   color: #000000;
@@ -297,10 +296,9 @@ const SearchHistory = styled.button`
   margin: 0 auto;
   width: 470px;
   height: 50px;
-  background: #FFFFFF;
+  background: #ffffff;
 
-  border: 1px solid #E3E3E3;
-
+  border: 1px solid #e3e3e3;
 `;
 
-export default SearchPlace
+export default SearchPlace;
