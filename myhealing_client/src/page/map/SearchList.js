@@ -5,11 +5,18 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
 function SearchList() {
+  const navigate = useNavigate();
+
+  const showResult = (event) => {
+    navigate("/searchplacebyname");
+    console.log('in');
+  };
+  
   return (
     <>
       <Wrapper>
         <div className="list-group wrapbox">
-            <a href="/searchplacebyname" className="list-group-item list-group-item-action">
+            <a onClick={()=> showResult()} className="list-group-item list-group-item-action">
                 <img src="img/search/me.svg" className=""></img>
                 <Texts>감자</Texts>
                 <Texts>2022.07.14</Texts>
@@ -20,7 +27,7 @@ function SearchList() {
                 <p className="mb-1"></p>
                 <small className="addmargin">여름에 힐링하러 가기 좋은 광화문 에 다녀왔어요~! 그 중 좋았던 곳을 추천 어쩌고 ...어쩌고</small>
             </a>
-            <a href="/searchplacebyname" className="list-group-item list-group-item-action">
+            <a onClick={()=> showResult()} className="list-group-item list-group-item-action">
                 <img src="img/search/me.svg" className=""></img>
                 <Texts>감자</Texts>
                 <Texts>2022.07.14</Texts>
@@ -31,7 +38,7 @@ function SearchList() {
                 <p className="mb-1"></p>
                 <small className="addmargin">여름에 힐링하러 가기 좋은 광화문 에 다녀왔어요~! 그 중 좋았던 곳을 추천 어쩌고 ...어쩌고</small>
             </a>
-            <a href="/searchplacebyname" className="list-group-item list-group-item-action">
+            <a onClick={()=> showResult()} className="list-group-item list-group-item-action">
                 <img src="img/search/me.svg" className=""></img>
                 <Texts>감자</Texts>
                 <Texts>2022.07.14</Texts>
@@ -42,7 +49,7 @@ function SearchList() {
                 <p className="mb-1"></p>
                 <small className="addmargin">여름에 힐링하러 가기 좋은 광화문 에 다녀왔어요~! 그 중 좋았던 곳을 추천 어쩌고 ...어쩌고</small>
             </a>
-            <a href="/searchplacebyname" className="list-group-item list-group-item-action">
+            <a onClick={()=> showResult()} className="list-group-item list-group-item-action">
                 <img src="img/search/me.svg" className=""></img>
                 <Texts>감자</Texts>
                 <Texts>2022.07.14</Texts>

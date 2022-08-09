@@ -30,10 +30,14 @@ function SearchPlace() {
   };
 
   const searchFunction = (event) => {
-    event.preventDefault();
+    //event.preventDefault();
    // navigate("/searchplacebyname");
     navigate("/searchlist");
     console.log('submit');
+  };
+
+  const setSearchText = (value) => {
+    console.log('1'+value);
   };
 
   return (
@@ -188,9 +192,9 @@ function SearchPlace() {
             <Option>[내용만]</Option>
             <img className="sampleImg" src="img/search/sampleimage.png" />
           </SerachSide>
-          <SearchHistory>동작구</SearchHistory>
-          <SearchHistory>광화문</SearchHistory>
-          <SearchHistory>용산구</SearchHistory>
+          <SearchHistory value={"동작구"} onClick={() => setSearchText(value)}>동작구</SearchHistory>
+          <SearchHistory value={"광화문"}>광화문</SearchHistory>
+          <SearchHistory value={"용산구"}>용산구</SearchHistory>
           <SearchHistory></SearchHistory>
           <SearchHistory></SearchHistory>
           <SearchHistory></SearchHistory>
