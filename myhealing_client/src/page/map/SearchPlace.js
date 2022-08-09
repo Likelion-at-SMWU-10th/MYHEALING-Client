@@ -23,13 +23,17 @@ function SearchPlace() {
   };
 
   const handleBlurColor = (color) => {
-    setActiveColor({
-      ...activeColor,
-      [color]: false,
-    });
+    let timer = setTimeout(()=>{ 
+      setActiveColor({
+        ...activeColor,
+        [color]: false,
+      });
+    }, 200);
+
+    return ()=>{ clearTimeout(timer) }
   };
 
-  const searchFunction = (event) => {
+  const searchFunction = (value) => {
     //event.preventDefault();
    // navigate("/searchplacebyname");
     navigate("/searchlist");
@@ -37,7 +41,7 @@ function SearchPlace() {
   };
 
   const setSearchText = (value) => {
-    console.log('1'+value);
+    console.log('11'+value);
   };
 
   return (
@@ -192,9 +196,9 @@ function SearchPlace() {
             <Option>[내용만]</Option>
             <img className="sampleImg" src="img/search/sampleimage.png" />
           </SerachSide>
-          <SearchHistory value={"동작구"} onClick={() => setSearchText(value)}>동작구</SearchHistory>
-          <SearchHistory value={"광화문"}>광화문</SearchHistory>
-          <SearchHistory value={"용산구"}>용산구</SearchHistory>
+          <SearchHistory onClick={() => searchFunction("동작구")}>동작구</SearchHistory>
+          <SearchHistory onClick={() => searchFunction("광화문")}>광화문</SearchHistory>
+          <SearchHistory onClick={() => searchFunction("용산구")}>용산구</SearchHistory>
           <SearchHistory></SearchHistory>
           <SearchHistory></SearchHistory>
           <SearchHistory></SearchHistory>
