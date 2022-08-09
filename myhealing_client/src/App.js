@@ -24,8 +24,14 @@ const App = () => {
           path="/writerandom"
           element={<WriteRandom apiUrl={apiUrl} />}
         ></Route>
-        <Route path="/writetoday" element={<WriteMemories />}></Route>
-        <Route path="/writeguide" element={<WriteGuide />}></Route>
+        <Route
+          path="/writetoday"
+          element={<WriteMemories apiUrl={apiUrl} />}
+        ></Route>
+        <Route
+          path="/writeguide"
+          element={<WriteGuide apiUrl={apiUrl} />}
+        ></Route>
         <Route path="/searchplace" element={<SearchPlace />}></Route>
         <Route
           path="/searchplacebyname"

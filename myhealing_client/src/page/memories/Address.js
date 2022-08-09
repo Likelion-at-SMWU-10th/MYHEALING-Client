@@ -3,7 +3,7 @@ import styled from "styled-components";
 import DaumPostcode from "react-daum-postcode";
 import AddressModal from "./AddressModal";
 
-const Address = () => {
+const Address = ({ onChange, address }) => {
   // 모달창
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -31,6 +31,8 @@ const Address = () => {
           readOnly
           value={kakaoAddress || ""}
           onClick={openModal}
+          name="address"
+          onChange={onChange}
         />
         <AddressModal open={modalOpen} close={closeModal} header="주소 검색">
           <DaumPostcode
