@@ -10,6 +10,7 @@ import WriteRandom from "./page/memories/WriteRandom";
 import WriteMemories from "./page/memories/WriteMemories";
 import WriteGuide from "./page/memories/WriteGuide";
 import SearchPlaceByName from "./page/map/SearchPlaceByName";
+import SearchList from "./page/map/SearchList";
 
 const apiUrl = "http://127.0.0.1:8000/";
 const App = () => {
@@ -36,6 +37,10 @@ const App = () => {
         <Route
           path="/searchplacebyname"
           element={<SearchPlaceByName />}
+        ></Route>
+        <Route
+          path="/searchlist"
+          element={<SearchList />}
         ></Route>
       </Route>
     </Routes>
