@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Address from "./Address";
@@ -6,6 +6,7 @@ import UploadPhoto from "./UploadPhoto";
 import TagModal from "./TagModal";
 import KeywordGroup from "./KeywordGroup";
 import { HiOutlineHashtag } from "react-icons/hi";
+import { FaStar } from "react-icons/fa";
 import axios from "axios";
 
 /*포커스기능주기*/
@@ -52,6 +53,29 @@ const WriteGuide = (apiUrl) => {
         window.location.reload();
       });
   };
+
+  //별점
+  const [clicked, setClicked] = useState([false, false, false, false, false]);
+  const starArray = [0, 1, 2, 3, 4];
+  const handleStarClick = (index) => {
+    let clickStates = [...clicked];
+    for (let i = 0; i < 5; i++) {
+      clickStates[i] = i <= index ? true : false;
+    }
+    setClicked(clickStates);
+  };
+
+  useEffect(() => {
+    sendReview();
+    console.log(clicked);
+  }, [clicked]); //컨디마 컨디업
+
+  const sendReview = () => {
+    let starScore = clicked.filter(Boolean).length;
+    console.log(starScore);
+    //api
+  };
+
   //태그
   const [tags, setTags] = useState([]);
   const [tagTrue, setTagTrue] = useState(false);
@@ -93,6 +117,20 @@ const WriteGuide = (apiUrl) => {
         <MainTitle>가이드 작성하기</MainTitle>
         <Box>
           <Address address={address} onChange={onChange} />
+          <Star>
+            <StarDiv>
+              {starArray.map((el, idx) => {
+                return (
+                  <FaStar
+                    key={idx}
+                    onClick={() => handleStarClick(el)}
+                    className={clicked[el] && "greenStar"}
+                    size="22"
+                  />
+                );
+              })}
+            </StarDiv>
+          </Star>
           <Title>
             <SubTitle>제목 : </SubTitle>
             <ContentTitle
@@ -209,6 +247,35 @@ const Box = styled.div`
   padding: 1rem;
   text-align: left;
   box-shadow: 0.3rem 0.3rem 0.3rem 0 #bdbdbd;
+`;
+
+const Star = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 38rem;
+`;
+
+const StarDiv = styled.div`
+  display: flex;
+  padding: 10px 0;
+  margin-left: 2rem;
+
+  & svg {
+    color: #d9d9d9;
+    cursor: pointer;
+  }
+
+  :hover svg {
+    color: #73bd88;
+  }
+
+  & svg:hover ~ svg {
+    color: #d9d9d9;
+  }
+
+  .greenStar {
+    color: #73bd88;
+  }
 `;
 
 const Title = styled.div`
