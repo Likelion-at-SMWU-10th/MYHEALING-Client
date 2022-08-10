@@ -13,6 +13,7 @@ import SearchPlaceByName from "./page/map/SearchPlaceByName";
 import SearchList from "./page/map/SearchList";
 import PostGuide from "./page/memories/PostGuide";
 import PostMemories from "./page/memories/PostMemories";
+import MyPage from "./page/myPage/MyPage";
 
 const apiUrl = "http://127.0.0.1:8000/";
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/map" element={<MapMain />}></Route>
         <Route path="/mem" element={<MemMain />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/mypage" element={<MyPage />}></Route>
         <Route
           path="/writerandom"
           element={<WriteRandom apiUrl={apiUrl} />}

@@ -76,7 +76,7 @@ const RandomGuide = styled.div`
   flex-direction: column;
   width: 80rem;
   height: 17rem;
-  border: 1px solid;
+  border: 1px solid rgba(0, 0, 0, 0.5);
   padding: 3rem;
   margin: 10rem 2rem 5rem 8rem;
   text-align: left;
@@ -100,7 +100,7 @@ const TodayMemories = styled.div`
   flex-direction: column;
   width: 80rem;
   height: 17rem;
-  border: 1px solid;
+  border: 1px solid rgba(0, 0, 0, 0.5);
   padding: 3rem;
   margin: 10rem 8rem 5rem 2rem;
   text-align: left;
