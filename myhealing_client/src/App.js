@@ -11,6 +11,8 @@ import WriteMemories from "./page/memories/WriteMemories";
 import WriteGuide from "./page/memories/WriteGuide";
 import SearchPlaceByName from "./page/map/SearchPlaceByName";
 import SearchList from "./page/map/SearchList";
+import PostGuide from "./page/memories/PostGuide";
+import PostMemories from "./page/memories/PostMemories";
 
 const apiUrl = "http://127.0.0.1:8000/";
 const App = () => {
@@ -33,15 +35,20 @@ const App = () => {
           path="/writeguide"
           element={<WriteGuide apiUrl={apiUrl} />}
         ></Route>
+        <Route
+          path="/postGuide"
+          element={<PostGuide apiUrl={apiUrl} />}
+        ></Route>
+        <Route
+          path="/postMemories"
+          element={<PostMemories apiUrl={apiUrl} />}
+        ></Route>
         <Route path="/searchplace" element={<SearchPlace />}></Route>
         <Route
           path="/searchplacebyname"
           element={<SearchPlaceByName />}
         ></Route>
-        <Route
-          path="/searchlist"
-          element={<SearchList />}
-        ></Route>
+        <Route path="/searchlist" element={<SearchList />}></Route>
       </Route>
     </Routes>
   );
