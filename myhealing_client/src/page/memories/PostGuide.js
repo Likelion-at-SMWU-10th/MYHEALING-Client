@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { HiOutlineHashtag } from "react-icons/hi";
 import { FaStar } from "react-icons/fa";
-import { BsArrowLeft } from "react-icons/bs";
+import { BsArrowLeft, BsShare, BsHeart } from "react-icons/bs";
 
 const PostPage = () => {
   return (
@@ -11,6 +11,16 @@ const PostPage = () => {
         <Arrow>
           <BsArrowLeft size="27" />
         </Arrow>
+        <LeftDiv>
+          <ShareDiv>
+            <BsShare size="27" />
+            <ShareCount>{0}</ShareCount>
+          </ShareDiv>
+          <HeartDiv>
+            <BsHeart size="27" />
+            <HeartCount>{0}</HeartCount>
+          </HeartDiv>
+        </LeftDiv>
         <AddressDiv>주소</AddressDiv>
         <Star>
           <StarDiv>
@@ -88,6 +98,47 @@ const Box = styled.div`
   text-align: left;
   box-shadow: 0.3rem 0.3rem 0.3rem 0 #bdbdbd;
 `;
+
+const LeftDiv = styled.div`
+  position: absolute;
+  right: 2rem;
+  top: 1.4rem;
+  display: flex;
+  flex-direction: row;
+`;
+
+const ShareDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-right: 0.7rem;
+
+  & svg {
+    cursor: pointer;
+  }
+
+  :hover svg {
+    color: #73bd88;
+  }
+`;
+
+const ShareCount = styled.div``;
+
+const HeartDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  & svg {
+    cursor: pointer;
+  }
+
+  :hover svg {
+    color: #73bd88;
+  }
+`;
+
+const HeartCount = styled.div``;
 
 const Star = styled.div`
   display: flex;

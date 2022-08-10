@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { HiOutlineHashtag } from "react-icons/hi";
 import { FaStar } from "react-icons/fa";
 import { BsArrowLeft } from "react-icons/bs";
 
@@ -12,11 +11,7 @@ const PostPage = () => {
           <BsArrowLeft size="27" />
         </Arrow>
         <AddressDiv>주소</AddressDiv>
-        <Star>
-          <StarDiv>
-            <FaStar />
-          </StarDiv>
-        </Star>
+        <LockImg src={"/img/lock.svg"} />
         <Title>
           <SubTitle>제목 : </SubTitle>
           <ContentTitle></ContentTitle>
@@ -77,33 +72,9 @@ const Box = styled.div`
   box-shadow: 0.3rem 0.3rem 0.3rem 0 #bdbdbd;
 `;
 
-const Star = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 38rem;
-`;
-
-const StarDiv = styled.div`
-  display: flex;
-  padding: 10px 0;
-  margin-left: 2rem;
-
-  & svg {
-    color: #d9d9d9;
-    cursor: pointer;
-  }
-
-  :hover svg {
-    color: #73bd88;
-  }
-
-  & svg:hover ~ svg {
-    color: #d9d9d9;
-  }
-
-  .greenStar {
-    color: #73bd88;
-  }
+const LockImg = styled.img`
+  width: 2rem;
+  margin: -1rem auto auto 35.4rem;
 `;
 
 const AddressDiv = styled.div`
