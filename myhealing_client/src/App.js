@@ -22,6 +22,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Menubar />}>
         <Route path="/" element={<Home />}></Route>
+        <Route path="/home" element={<Home />}></Route>
         <Route path="/map" element={<MapMain />}></Route>
         <Route path="/intro" element={<IntroPage />}></Route>
         <Route path="/mem" element={<MemMain />}></Route>
