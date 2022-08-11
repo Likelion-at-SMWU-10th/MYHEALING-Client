@@ -14,14 +14,16 @@ import SearchList from "./page/map/SearchList";
 import PostGuide from "./page/memories/PostGuide";
 import PostMemories from "./page/memories/PostMemories";
 import MyPage from "./page/myPage/MyPage";
+import IntroPage from "./page/intro/IntroPage";
 
 const apiUrl = "http://127.0.0.1:8000/";
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Menubar />}>
-        <Route path="/home" element={<Home />}></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route path="/map" element={<MapMain />}></Route>
+        <Route path="/intro" element={<IntroPage />}></Route>
         <Route path="/mem" element={<MemMain />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
