@@ -8,7 +8,7 @@ const Menubar = () => {
     <div>
       <ul className="nav">
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="./home">
+          <a className="nav-link active" aria-current="page" href="./intro">
             서비스 소개
           </a>
         </li>
