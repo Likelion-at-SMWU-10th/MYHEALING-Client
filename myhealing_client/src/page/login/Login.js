@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { SiNaver } from "react-icons/si";
+import OurLogin from "./OurLogin";
 
 const Login = () => {
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${"##################"}&redirect_uri=${"http://localhost:3000/kakaoLogin"}&response_type=code`;
@@ -22,6 +23,8 @@ const Login = () => {
           <br />
           로그인이 필요해요!
         </Alert>
+        <OurLogin></OurLogin>
+        <br/>
         <Message>SNS 계정으로 간편하게 시작하세요.</Message>
         <KakaoBtn onClick={handleSignKakao}>
           <KakaoIcon />
@@ -61,24 +64,24 @@ const LoginWrapper = styled.div`
 `;
 
 const MyHealing = styled.div`
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.3rem;
   font-family: "Comfortaa";
   color: #73bd88;
-  font-size: 2.8rem;
+  font-size: 2.4rem;
   font-style: normal;
   font-weight: 400;
 `;
 
 const Alert = styled.div`
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   font-family: "Mulish";
   color: #373f41;
-  font-size: 3rem;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 700;
   white-space: pre-wrap;
-  line-height: 5rem;
+  line-height: 2rem;
 `;
 
 const Message = styled.div`
@@ -99,7 +102,7 @@ const KakaoBtn = styled.button`
   width: 25rem;
   height: 4rem;
   padding: 1rem 5.2rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   border: none;
   border-radius: 0.5rem;
   background-color: #f9e000;
@@ -130,7 +133,7 @@ const NaverBtn = styled.button`
   width: 25rem;
   height: 4rem;
   padding: 1rem 5.2rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   border: none;
   border-radius: 0.5rem;
   background-color: #2db400;
