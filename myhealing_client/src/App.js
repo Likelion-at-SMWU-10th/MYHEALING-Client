@@ -15,6 +15,7 @@ import PostGuide from "./page/memories/PostGuide";
 import PostMemories from "./page/memories/PostMemories";
 import MyPage from "./page/myPage/MyPage";
 import IntroPage from "./page/intro/IntroPage";
+import SearchPlaceByGu from "./page/map/SearchPlaceByGu";
 
 const apiUrl = "http://127.0.0.1:8000/";
 const App = () => {
@@ -54,6 +55,7 @@ const App = () => {
           element={<SearchPlaceByName />}
         ></Route>
         <Route path="/searchlist" element={<SearchList />}></Route>
+        <Route path="/searchplacebygu" element={<SearchPlaceByGu />}></Route>
       </Route>
     </Routes>
   );
