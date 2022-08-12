@@ -34,6 +34,7 @@ const Menubar = () => {
 
         <li className="nav-item">
           <LoginBtn text="Log in" />
+          <LoginBtn text="Register" />
         </li>
       </ul>
 

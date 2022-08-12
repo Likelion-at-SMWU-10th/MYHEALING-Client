@@ -1,6 +1,7 @@
 /* navbar */
 .nav {
-    margin-left: 50px;
+    margin: 0 auto;
+    width:90%;
     height: 110px;
     z-index: 2000;
     background-color: #fff;
