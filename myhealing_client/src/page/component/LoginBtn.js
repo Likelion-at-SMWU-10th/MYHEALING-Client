@@ -1,10 +1,10 @@
 import React from "react";
 import './LoginBtn.css';
 
-const LoginBtn = ({text}) => {
+const LoginBtn = ({text, hreflink}) => {
     return (
         <>
-            <a className="loginbtn btn-default" href="./login" role="button">
+            <a className="loginbtn btn-default" href={hreflink} role="button">
                 {text}
             </a>
         </>

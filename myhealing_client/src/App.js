@@ -16,6 +16,7 @@ import PostMemories from "./page/memories/PostMemories";
 import MyPage from "./page/myPage/MyPage";
 import IntroPage from "./page/intro/IntroPage";
 import SearchPlaceByGu from "./page/map/SearchPlaceByGu";
+import Register from "./page/login/Register";
 
 const apiUrl = "http://127.0.0.1:8000/";
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/intro" element={<IntroPage />}></Route>
         <Route path="/mem" element={<MemMain />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/register" element={<Register />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
         <Route
           path="/writerandom"

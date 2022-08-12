@@ -33,8 +33,8 @@ const Menubar = () => {
         </a>
 
         <li className="nav-item">
-          <LoginBtn text="Log in" />
-          <LoginBtn text="Register" />
+          <LoginBtn text="Log in" hreflink="./login"/>
+          <LoginBtn text="Register" hreflink="./register" />
         </li>
       </ul>
 
