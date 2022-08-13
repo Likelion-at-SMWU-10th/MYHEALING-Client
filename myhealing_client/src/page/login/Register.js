@@ -166,7 +166,7 @@ const Register = () => {
                         id="textIntro"
                         name="introduce"
                         rows="3"
-                        maxLength={50}
+                        maxLength={50}  
                         
                         value={values.introduce}
                         onChange={handleChange}>
