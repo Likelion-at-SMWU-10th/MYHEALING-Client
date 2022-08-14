@@ -4,11 +4,13 @@ import Inform from "./Inform";
 import styled from "styled-components";
 import "./SearchPlace.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios';
 
 function SearchPlace() {
   const navigate = useNavigate();
+  const { state } = useLocation();
+  console.log(state);
 
   const [activeColor, setActiveColor] = useState({
     keyword: false,
@@ -40,12 +42,7 @@ function SearchPlace() {
     navigate("/searchlist");
     
     console.log('submit');
-    axios.get("http://127.0.0.1:8000/guide/recommend", {
-      params: {
-        keyword: ["친구와"],
-        region:"청파동"
-      }
-    })
+    axios.get("http://127.0.0.1:8000/guide/")
     .then(function (response) {
          // response  
          console.log(response.data);
