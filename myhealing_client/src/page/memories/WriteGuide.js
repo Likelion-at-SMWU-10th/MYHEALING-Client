@@ -11,7 +11,7 @@ import axios from "axios";
 
 /*포커스기능주기*/
 
-const WriteGuide = (apiUrl) => {
+const WriteGuide = ({ apiUrl }) => {
   //api 연결
   const [inputs, setInputs] = useState({
     create_id: "",
@@ -21,37 +21,62 @@ const WriteGuide = (apiUrl) => {
     title: "",
     body: "",
     address: "",
-    thumbnail: "",
+    star: "",
+    tag: "",
+    image: "",
   });
 
-  //동시에 관리하기 위한 객체 만들어주기
-  const { create_id, date, place, cost, title, body, address, thumbnail } =
-    inputs;
-
   //onChange 함수 만들어주기
-  const onChange = (e) => {
-    const { value, name } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
+  const changeInput = (e) => {
+    const newInputs = { ...inputs };
+    newInputs[e.target.name] = e.target.value;
+    setInputs(newInputs);
+    console.log(newInputs);
   };
+
   const navigate = useNavigate();
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
+    let formData = new FormData();
+    const config = {
+      header: { "content-Type": "multipart/form-data" },
+    };
+    formData.append("image", inputs.image);
     axios
-      .post(`${apiUrl}guide/`, {
-        creator_id: 20,
-        date: inputs.date,
-        place: inputs.place,
-        cost: inputs.cost,
-        title: inputs.title,
-        body: inputs.body,
-        address: inputs.address,
-        thumbnail: inputs.thumbnail,
-      })
-      .then(() => {
-        window.location.reload();
+      .post(
+        `${apiUrl}guide/`,
+        {
+          creator_id: 20,
+          date: inputs.date,
+          place: inputs.place,
+          cost: inputs.cost,
+          title: inputs.title,
+          body: inputs.body,
+          address: inputs.address,
+          star: inputs.star,
+          tag: inputs.tag,
+          formData,
+        },
+        config
+      )
+      .then((res) => {
+        console.log(res.data);
       });
+  };
+
+  // 주소
+  const [ad, setAd] = useState("");
+  const getAd = (gad) => {
+    setAd(gad);
+    inputs.address = gad;
+  };
+
+  // 사진
+  const [ph, setPh] = useState([]);
+  const getPh = (gph) => {
+    setPh([...ph, gph]);
+    inputs.image = [...ph, gph];
+    console.log(inputs.image);
   };
 
   //별점
@@ -73,6 +98,7 @@ const WriteGuide = (apiUrl) => {
   const sendReview = () => {
     let starScore = clicked.filter(Boolean).length;
     console.log(starScore);
+    inputs.star = starScore;
     //api
   };
 
@@ -82,6 +108,7 @@ const WriteGuide = (apiUrl) => {
   const getTag = (gtags) => {
     setTags([...tags, gtags]);
     setTagTrue(true);
+    inputs.tag = JSON.stringify([...tags, gtags]);
   };
 
   const resetTag = (e) => {
@@ -111,12 +138,18 @@ const WriteGuide = (apiUrl) => {
   const closeModal = () => {
     setModalOpen(false);
   };
+
   return (
     <Container>
       <Wrapper>
         <MainTitle>가이드 작성하기</MainTitle>
         <Box>
-          <Address address={address} onChange={onChange} />
+          <Address
+            name="address"
+            value={inputs.address}
+            onChange={changeInput}
+            getAd={getAd}
+          />
           <Star>
             <StarDiv>
               {starArray.map((el, idx) => {
@@ -126,6 +159,8 @@ const WriteGuide = (apiUrl) => {
                     onClick={() => handleStarClick(el)}
                     className={clicked[el] && "greenStar"}
                     size="22"
+                    name="star"
+                    value={inputs.star}
                   />
                 );
               })}
@@ -136,8 +171,8 @@ const WriteGuide = (apiUrl) => {
             <ContentTitle
               type="text"
               name="title"
-              value={title}
-              onChange={onChange}
+              value={inputs.title}
+              onChange={changeInput}
             ></ContentTitle>
           </Title>
           <Date>
@@ -145,8 +180,8 @@ const WriteGuide = (apiUrl) => {
             <ContentDate
               type="text"
               name="date"
-              value={date}
-              onChange={onChange}
+              value={inputs.date}
+              onChange={changeInput}
             ></ContentDate>
           </Date>
           <Place>
@@ -154,8 +189,8 @@ const WriteGuide = (apiUrl) => {
             <ContentPlace
               type="text"
               name="place"
-              value={place}
-              onChange={onChange}
+              value={inputs.place}
+              onChange={changeInput}
             ></ContentPlace>
           </Place>
           <Expense>
@@ -164,8 +199,8 @@ const WriteGuide = (apiUrl) => {
               type="number"
               placeholder="숫자로 작성"
               name="cost"
-              value={cost}
-              onChange={onChange}
+              value={inputs.cost}
+              onChange={changeInput}
             ></ContentNum>
           </Expense>
           <MainText>
@@ -177,13 +212,19 @@ const WriteGuide = (apiUrl) => {
                 rows="6"
                 onInput={onInput}
                 name="body"
-                value={body}
-                onChange={onChange}
+                value={inputs.body}
+                onChange={changeInput}
               ></ContentText>
               <Counter>({count === "" ? 0 : count}/500)</Counter>
             </ContentWrapper>
           </MainText>
-          <UploadPhoto setImages={setImageSrc}></UploadPhoto>
+          <UploadPhoto
+            setImages={setImageSrc}
+            getPh={getPh}
+            name="image"
+            value={inputs.image}
+            onChange={changeInput}
+          ></UploadPhoto>
           <SelectTag>
             <Sub>
               <TagDiv>
@@ -195,12 +236,18 @@ const WriteGuide = (apiUrl) => {
                 close={closeModal}
                 header="키워드로 맞춤 장소 찾기"
               >
-                <KeywordGroup tags={tags} getTag={getTag} />
+                <KeywordGroup getTag={getTag} onChange={changeInput} />
               </TagModal>
             </Sub>
             <Tags>
               {tags.map((tag) => (
-                <TagList tag={tag} key={tag}>
+                <TagList
+                  tag={tag}
+                  key={tag}
+                  name="tag"
+                  value={inputs.tag}
+                  onChange={changeInput}
+                >
                   {tag}
                 </TagList>
               ))}
@@ -210,7 +257,7 @@ const WriteGuide = (apiUrl) => {
         </Box>
         <BottomBtn>
           <CancelBtn onClick={() => navigate(-1)}>취소하기</CancelBtn>
-          <SubmitBtn onSubmit={onSubmit}>저장하기</SubmitBtn>
+          <SubmitBtn onClick={onSubmit}>저장하기</SubmitBtn>
         </BottomBtn>
       </Wrapper>
     </Container>

@@ -3,7 +3,13 @@ import styled from "styled-components";
 import DaumPostcode from "react-daum-postcode";
 import AddressModal from "./AddressModal";
 
-const Address = ({ onChange, address }) => {
+const Address = ({ getAd }) => {
+  //부모
+  const clickAd = (e) => {
+    console.log(e);
+    getAd(e);
+  };
+
   // 모달창
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -19,6 +25,7 @@ const Address = ({ onChange, address }) => {
   const [kakaoAddress, setKakaoAddress] = useState("");
   const handle = (data) => {
     setKakaoAddress(data.address);
+    clickAd(data.address);
     closeModal();
   };
 
@@ -32,7 +39,6 @@ const Address = ({ onChange, address }) => {
           value={kakaoAddress || ""}
           onClick={openModal}
           name="address"
-          onChange={onChange}
         />
         <AddressModal open={modalOpen} close={closeModal} header="주소 검색">
           <DaumPostcode
