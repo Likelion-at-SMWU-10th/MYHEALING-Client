@@ -11,19 +11,29 @@ import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 
 SwiperCore.use([Navigation, Pagination]);
 
-const UploadPhoto = () => {
+const UploadPhoto = ({ getPh }) => {
+  //부모
+  const clickPh = (e) => {
+    console.log(e);
+    getPh(e);
+  };
+
   //사진 첨부
   const [img, setImg] = useState([]);
   const addImg = (e) => {
     const nowSelectImgList = e.target.files;
+    console.log(nowSelectImgList[0]);
+    clickPh(nowSelectImgList[0]);
     const nowImgUrlList = [...img];
     for (let i = 0; i < nowSelectImgList.length; i += 1) {
       const nowImgUrl = URL.createObjectURL(nowSelectImgList[i]);
       nowImgUrlList.push(nowImgUrl);
+      //clickPh(nowImgUrl);
     }
 
     setImg(nowImgUrlList);
-    e.target.value = "";
+
+    //e.target.value = "";
   };
 
   const deleteImg = (e) => {
