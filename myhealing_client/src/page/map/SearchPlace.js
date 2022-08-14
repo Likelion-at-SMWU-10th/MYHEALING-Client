@@ -10,6 +10,21 @@ import axios from 'axios';
 function SearchPlace() {
   const navigate = useNavigate();
   const { state } = useLocation();
+
+  const [tags, setTags] = useState([]);
+  const [tagTrue, setTagTrue] = useState(false);
+  const updateTags = (gtags) => {
+    console.log('2' + gtags);
+    setTags([...tags, gtags]);
+    setTagTrue(true);
+  };
+
+  const resetTag = (e) => {
+    const copyMyTag = [];
+    setTags(copyMyTag);
+    setTagTrue(false);
+  };
+
   console.log(state);
 
   const [activeColor, setActiveColor] = useState({
@@ -68,6 +83,15 @@ function SearchPlace() {
           ></input>
         </form>
 
+        <Tags>
+          {tags.map(tag => (
+            <TagList tag={tag} key={tag}>
+              {tag}
+            </TagList>
+          ))}
+          {tagTrue ? <Reset onClick={resetTag}>x</Reset> : null}
+        </Tags>
+
         <div className={keyword ? "container chidden" : "container"}>
           <Inform text={"키워드로 맞춤 장소 찾기"} />
           <div className="row">
@@ -84,14 +108,14 @@ function SearchPlace() {
                   </div>
                   <div>
                     <div className="flex-container">
-                      <Keyword text={"활발한"} />
-                      <Keyword text={"조용한"} />
-                      <Keyword text={"따스한"} />
+                      <Keyword text="활발한" updateTags={updateTags} />
+                      <Keyword text="조용한" updateTags={updateTags} />
+                      <Keyword text="따스한" updateTags={updateTags} />
                     </div>
                     <div className="flex-container">
-                      <Keyword text={"싱그러운"} />
-                      <Keyword text={"적극적인"} />
-                      <Keyword text={"차가운"} />
+                      <Keyword text="싱그러운" updateTags={updateTags} />
+                      <Keyword text="적극적인" updateTags={updateTags} />
+                      <Keyword text="차가운" updateTags={updateTags} />
                     </div>
                   </div>
                 </div>
@@ -105,13 +129,13 @@ function SearchPlace() {
                     <span className="toptitle">누구랑?</span>
                   </div>
                   <div className="flex-container">
-                    <Keyword text={"부모님과"} />
-                    <Keyword text={"친구와"} />
-                    <Keyword text={"애인과"} />
+                    <Keyword text="부모님과" updateTags={updateTags} />
+                    <Keyword text="친구와" updateTags={updateTags} />
+                    <Keyword text="애인과" updateTags={updateTags} />
                   </div>
                   <div className="flex-container">
-                    <Keyword text={"아이들과"} />
-                    <Keyword text={"처음보는 사람과"} />
+                    <Keyword text="아이들과" updateTags={updateTags} />
+                    <Keyword text="처음보는 사람과" updateTags={updateTags} />
                   </div>
                 </div>
               </div>
@@ -128,13 +152,13 @@ function SearchPlace() {
                     <span className="toptitle">날씨</span>
                   </div>
                   <div className="flex-container">
-                    <Keyword text={"화창한"} />
-                    <Keyword text={"흐림"} />
-                    <Keyword text={"비온 후"} />
+                    <Keyword text="화창한" updateTags={updateTags} />
+                    <Keyword text="흐림" updateTags={updateTags} />
+                    <Keyword text="비온 후" updateTags={updateTags} />
                   </div>
                   <div className="flex-container">
-                    <Keyword text={"비오는 날"} />
-                    <Keyword text={"바람부는"} />
+                    <Keyword text="비오는 날" updateTags={updateTags} />
+                    <Keyword text="바람부는" updateTags={updateTags}  />
                   </div>
                 </div>
                 <div className="col">
@@ -147,15 +171,15 @@ function SearchPlace() {
                     <span className="toptitle">기타</span>
                   </div>
                   <div className="flex-container">
-                    <Keyword text={"시즌제"} />
-                    <Keyword text={"연중무휴"} />
-                    <Keyword text={"킬링타임"} />
+                    <Keyword text="시즌제" updateTags={updateTags} />
+                    <Keyword text="연중무휴" updateTags={updateTags}  />
+                    <Keyword text="킬링타임" updateTags={updateTags} />
                   </div>
                   <div className="flex-container">
-                    <Keyword text={"노트북"} />
-                    <Keyword text={"카공"} />
-                    <Keyword text={"신규"} />
-                    <Keyword text={"음악"} />
+                    <Keyword text="노트북" updateTags={updateTags} />
+                    <Keyword text="카공" updateTags={updateTags} />
+                    <Keyword text="신규" updateTags={updateTags} />
+                    <Keyword text="음악" updateTags={updateTags} />
                   </div>
                 </div>
               </div>
@@ -170,31 +194,31 @@ function SearchPlace() {
                 <span className="toptitle">장소 특징</span>
               </div>
               <div className="flex-container">
-                <Keyword text={"계곡"} />
-                <Keyword text={"복합공간"} />
-                <Keyword text={"퍼레이드"} />
-                <Keyword text={"집"} />
+                <Keyword text="계곡" updateTags={updateTags} />
+                <Keyword text="복합공간" updateTags={updateTags} />
+                <Keyword text="퍼레이드" updateTags={updateTags} />
+                <Keyword text="집" updateTags={updateTags} />
               </div>
               <div className="flex-container">
-                <Keyword text={"카페"} />
-                <Keyword text={"음식점"} />
-                <Keyword text={"바다"} />
-                <Keyword text={"휴양지"} />
+                <Keyword text="카페" updateTags={updateTags} />
+                <Keyword text="음식점" updateTags={updateTags} />
+                <Keyword text="바다" updateTags={updateTags} />
+                <Keyword text="휴양지" updateTags={updateTags} />
               </div>
               <div className="flex-container">
-                <Keyword text={"술집"} />
-                <Keyword text={"프렌차이즈"} />
-                <Keyword text={"산"} />
-                <Keyword text={"공연장"} />
+                <Keyword text="술집" updateTags={updateTags} />
+                <Keyword text="프렌차이즈" updateTags={updateTags} />
+                <Keyword text="산" updateTags={updateTags} />
+                <Keyword text="공연장" updateTags={updateTags} />
               </div>
               <div className="flex-container">
-                <Keyword text={"저렴한"} />
-                <Keyword text={"가격대가 높은"} />
-                <Keyword text={"사람이 많은"} />
+                <Keyword text="저렴한" updateTags={updateTags} />
+                <Keyword text="가격대가 높은" updateTags={updateTags} />
+                <Keyword text="사람이 많은" updateTags={updateTags} />
               </div>
               <div className="flex-container">
-                <Keyword text={"체험위주"} />
-                <Keyword text={"관람위주"} />
+                <Keyword text="체험위주" updateTags={updateTags} />
+                <Keyword text="관람위주" updateTags={updateTags} />
               </div>
             </div>
           </div>
@@ -323,4 +347,37 @@ const SearchHistory = styled.button`
   border: 1px solid #e3e3e3;
 `;
 
+const Tags = styled.div`
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+
+  margin : 0 auto;
+  flex-wrap: wrap;
+`;
+
+
+const TagList = styled.div`
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.1rem;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+  color: #999999;
+  border: 1px solid #cecece;
+  border-radius: 20px;
+  font-size: small;
+`;
+
+const Reset = styled.button`
+  position: relative;
+  top: -0.6rem;
+  border: none;
+  background-color: #ffffff;
+  color: #73bd88;
+  padding: 0.5rem;
+`;
+
 export default SearchPlace;
+

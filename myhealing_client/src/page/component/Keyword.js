@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./Keyword.css";
 
-const Keyword = ({text}) => {
-    const keywordClick = (txt) => {
-        console.log(txt.text);
+const Keyword = ({text, updateTags}) => {
+    const keywordClick = (e) => {
+        console.log({text});
+        updateTags({text}.text);
     };
 
     return (
@@ -11,7 +12,7 @@ const Keyword = ({text}) => {
             <button 
                 type="button" 
                 className="btn btn-outline-secondary btn_keyword"
-                onClick={() => keywordClick({text})}
+                onClick={keywordClick}
                 > 
                 {text}
             </button>
@@ -20,3 +21,4 @@ const Keyword = ({text}) => {
 };
 
 export default Keyword;
+
