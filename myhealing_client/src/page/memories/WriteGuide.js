@@ -8,13 +8,14 @@ import KeywordGroup from "./KeywordGroup";
 import { HiOutlineHashtag } from "react-icons/hi";
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 /*포커스기능주기*/
 
 const WriteGuide = ({ apiUrl }) => {
   //api 연결
   const [inputs, setInputs] = useState({
-    create_id: "",
     date: "",
     place: "",
     cost: "",
@@ -26,6 +27,11 @@ const WriteGuide = ({ apiUrl }) => {
     image: "",
   });
 
+  //tag 반복문
+  // const newTag = inputs.tag.map(function (a) {
+  //   return a;
+  // });
+
   //onChange 함수 만들어주기
   const changeInput = (e) => {
     const newInputs = { ...inputs };
@@ -35,28 +41,33 @@ const WriteGuide = ({ apiUrl }) => {
   };
 
   const navigate = useNavigate();
+  const access = cookies.get("access_token");
   const onSubmit = (e) => {
     e.preventDefault();
     let formData = new FormData();
     const config = {
-      header: { "content-Type": "multipart/form-data" },
+      headers: {
+        "content-Type": "multipart/form-data",
+        Authorization: `Bearer ${access}`,
+      },
     };
-    formData.append("image", inputs.image);
+    formData.append("date", inputs.date);
+    formData.append("place", inputs.place);
+    formData.append("cost", inputs.cost);
+    formData.append("title", inputs.title);
+    formData.append("body", inputs.body);
+    formData.append("address", inputs.address);
+    formData.append("star", inputs.star);
+    formData.append("tag", inputs.tag);
+    for (let i = 0; i < inputs.image.length; i++) {
+      formData.append("image", inputs.image[i]);
+    }
     axios
       .post(
         `${apiUrl}guide/`,
-        {
-          creator_id: 20,
-          date: inputs.date,
-          place: inputs.place,
-          cost: inputs.cost,
-          title: inputs.title,
-          body: inputs.body,
-          address: inputs.address,
-          star: inputs.star,
-          tag: inputs.tag,
-          formData,
-        },
+
+        formData,
+
         config
       )
       .then((res) => {
