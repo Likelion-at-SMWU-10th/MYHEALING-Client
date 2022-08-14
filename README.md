@@ -14,3 +14,4 @@ Project local 에서 돌리려면 설치해야 하는 yarn list
 8. yarn add axios
 9. npm install react-avatar --save 
   (설치 오류나면 --legacy-peer-deps 이 옵션을 추가하세요!)
+10. yarn add universal-cookie
