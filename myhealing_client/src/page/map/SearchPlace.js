@@ -75,6 +75,8 @@ function SearchPlace() {
   return (
     <>
       <div className={keyword ? "greensearch" : "whitesearch"}>
+        
+        <GuName text={state} >{state}</GuName>
         <form onSubmit={() => searchFunction()}>
           <input
             className="input-group mb-3 topsearchbox"
@@ -82,7 +84,6 @@ function SearchPlace() {
             onBlur={() => handleBlurColor("keyword")}
           ></input>
         </form>
-
         <Tags>
           {tags.map(tag => (
             <TagList tag={tag} key={tag}>
@@ -93,7 +94,7 @@ function SearchPlace() {
         </Tags>
 
         <div className={keyword ? "container chidden" : "container"}>
-          <Inform text={"키워드로 맞춤 장소 찾기"} />
+         <Inform text={"키워드로 맞춤 장소 찾기"} />
           <div className="row">
             <div className="col">
               <div className="row row-cols-1">
@@ -244,6 +245,12 @@ function SearchPlace() {
     </>
   );
 }
+
+const GuName = styled.p`
+  margin: 0 auto;
+  font-family: "Montserrat";
+  text-align: center;
+`;
 
 const SerachSide = styled.div`
   box-sizing: border-box;
