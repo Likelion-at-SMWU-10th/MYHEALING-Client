@@ -51,13 +51,18 @@ const Register = () => {
         const config = {
             header: { 'content-Type': 'multipart/form-data' }          
         }
-        formData.append("profile_photo",selectedFile)
+        if(selectedFile) {
+            formData.append("profile_photo",selectedFile)
+        }
         formData.append("user_id",values.user_id)
         formData.append("password",values.password)
         formData.append("email",values.email)
         formData.append("nickname",values.nickname)
         formData.append("introduce",values.introduce)
         
+        for (let value of formData.values()) {
+            console.log(value);
+          }
 
         axios.post("http://127.0.0.1:8000/signup/", formData, config /*{
             user_id: user_id,

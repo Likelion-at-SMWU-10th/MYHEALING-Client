@@ -13,13 +13,13 @@ const Menubar = () => {
           </a>
         </li>
         <li className="nav-item">
-          <a className="nav-link active" href="./searchplacebygu">
+          <a className="nav-link active" href="./searchplacebyinput">
             장소 검색
           </a>
         </li>
         <li className="nav-item">
-          <a className="nav-link active" href="#">
-            Community
+          <a className="nav-link active" href="./searchplacebygu">
+            맞춤 장소 찾기
           </a>
         </li>
         <li className="nav-item">

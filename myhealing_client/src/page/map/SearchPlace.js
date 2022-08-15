@@ -74,26 +74,9 @@ function SearchPlace() {
 
   return (
     <>
-      <div className={keyword ? "greensearch" : "whitesearch"}>
-        
-        <GuName text={state} >{state}</GuName>
-        <form onSubmit={() => searchFunction()}>
-          <input
-            className="input-group mb-3 topsearchbox"
-            onFocus={() => handleFocusColor("keyword")}
-            onBlur={() => handleBlurColor("keyword")}
-          ></input>
-        </form>
-        <Tags>
-          {tags.map(tag => (
-            <TagList tag={tag} key={tag}>
-              {tag}
-            </TagList>
-          ))}
-          {tagTrue ? <Reset onClick={resetTag}>x</Reset> : null}
-        </Tags>
+      <div className="whitesearch">
 
-        <div className={keyword ? "container chidden" : "container"}>
+        <div className="container">
          <Inform text={"키워드로 맞춤 장소 찾기"} />
           <div className="row">
             <div className="col">
@@ -223,23 +206,22 @@ function SearchPlace() {
               </div>
             </div>
           </div>
-        </div>
 
-        <div className={keyword ? "container" : "container chidden"}>
-          <SerachSide>
-            <Title>검색 필터 설정</Title>
-            <SubTitle>모든 검색어/ 제목만 / 내용만</SubTitle>
-            <Option>[모든 검색어]</Option>
-            <Option>[제목만]</Option>
-            <Option>[내용만]</Option>
-            <img className="sampleImg" src="img/search/sampleimage.png" />
-          </SerachSide>
-          <SearchHistory onClick={() => searchFunction("동작구")}>동작구</SearchHistory>
-          <SearchHistory onClick={() => searchFunction("광화문")}>광화문</SearchHistory>
-          <SearchHistory onClick={() => searchFunction("용산구")}>용산구</SearchHistory>
-          <SearchHistory></SearchHistory>
-          <SearchHistory></SearchHistory>
-          <SearchHistory></SearchHistory>
+        <Tags>
+          <GuName>선택한 키워드 👉🏻&nbsp;&nbsp;&nbsp;</GuName>
+          {tags.map(tag => (
+            <TagList tag={tag} key={tag}>
+              {tag}
+            </TagList>
+          ))}
+          {tagTrue ? <Reset onClick={resetTag}>x</Reset> : null}
+        </Tags>
+        <GuName text={state} > 선택한 지역 👉🏻 &nbsp;&nbsp;&nbsp;{state}</GuName>
+
+          <BottomWrapper>
+            <LeafImg src={"/img/leaf.png"} />
+            <GuideBtn onClick={searchFunction}>맞춤 장소 검색</GuideBtn>
+          </BottomWrapper>
         </div>
       </div>
     </>
@@ -250,109 +232,13 @@ const GuName = styled.p`
   margin: 0 auto;
   font-family: "Montserrat";
   text-align: center;
+  margin-top: 3px;
+
+  maring-bottom: 20px;
+  vertical-align: middle;
+  
 `;
 
-const SerachSide = styled.div`
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 350px;
-  height: 407px;
-  left: 63px;
-  top: 172px;
-
-  background: rgba(255, 255, 255, 0.4);
-`;
-
-const Title = styled.div`
-  width: 316px;
-  height: 72px;
-
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  display: flex;
-  align-items: center;
-
-  color: #000000;
-  margin-left: 20px;
-
-  /* Inside auto layout */
-
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-`;
-
-const SubTitle = styled.div`
-  width: 316px;
-  height: 64px;
-
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-
-  display: flex;
-  align-items: center;
-
-  color: #000000;
-  margin-left: 20px;
-
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-`;
-
-const Option = styled.button`
-  width: 265px;
-  height: 37px;
-
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 900;
-  font-size: 14px;
-  line-height: 25px;
-  /* or 179% */
-
-  display: flex;
-  align-items: center;
-
-  color: #000000;
-  margin-left: 20px;
-  background: rgba(255, 255, 255, 0.4);
-  border: 0px;
-
-  /* Inside auto layout */
-
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-`;
-
-const SearchHistory = styled.button`
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 50px;
-
-  top: 0px;
-  left: 400px;
-
-  display: flex;
-  justify-content: center;
-
-  color: #000000;
-
-  margin: 0 auto;
-  width: 470px;
-  height: 50px;
-  background: #ffffff;
-
-  border: 1px solid #e3e3e3;
-`;
 
 const Tags = styled.div`
   width: fit-content;
@@ -361,6 +247,7 @@ const Tags = styled.div`
 
   margin : 0 auto;
   flex-wrap: wrap;
+  margin-top:40px;
 `;
 
 
@@ -384,6 +271,44 @@ const Reset = styled.button`
   background-color: #ffffff;
   color: #73bd88;
   padding: 0.5rem;
+`;
+
+
+const BottomWrapper = styled.div`
+  margin-top:50px;
+  
+  margin-bottom:70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 25%;
+`;
+
+const LeafImg = styled.img`
+  position: relative;
+  right: -2rem;
+  bottom: 2rem;
+  height: 5rem;
+  opacity: 0.7;
+  z-index: 1000;
+`;
+
+const GuideBtn = styled.button`
+  position: relative;
+  width: 10rem;
+  height: 3rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #73bd88;
+  font-family: "NotoSansKR";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  color: #ffffff;
+  box-shadow: 0 0.3rem 0.3rem 0 #bdbdbd;
+  margin-right: 8rem;
+  text-align: center;
 `;
 
 export default SearchPlace;
