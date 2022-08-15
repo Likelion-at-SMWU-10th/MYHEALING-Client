@@ -5,7 +5,6 @@ import styled from "styled-components";
 import "./SearchPlace.css";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from 'axios';
 
 function SearchPlace() {
   const navigate = useNavigate();
@@ -13,8 +12,11 @@ function SearchPlace() {
 
   const [tags, setTags] = useState([]);
   const [tagTrue, setTagTrue] = useState(false);
+
   const updateTags = (gtags) => {
     console.log('2' + gtags);
+    console.log('json : '+JSON.stringify(tags));
+
     setTags([...tags, gtags]);
     setTagTrue(true);
   };
@@ -54,18 +56,11 @@ function SearchPlace() {
   const searchFunction = (value) => {
     //event.preventDefault();
    // navigate("/searchplacebyname");
-    navigate("/searchlist");
-    
-    console.log('submit');
-    axios.get("http://127.0.0.1:8000/guide/")
-    .then(function (response) {
-         // response  
-         console.log(response.data);
-    }).catch(function (error) {
-        // 오류발생시 실행
-    }).then(function() {
-        // 항상 실행
-    });
+    const sendData = {
+      "gu":{state}.state,
+      "tags":JSON.stringify(tags)
+    }
+    navigate("/searchlist",{state:sendData});
   };
 
   const setSearchText = (value) => {

@@ -1,11 +1,40 @@
 import React from "react";
 import styled from "styled-components";
 import "./SearchList.css";
-import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from 'react-router-dom';
 
-function SearchList() {
+import axios from 'axios';
+
+function SearchList({ apiUrl }) {
   const navigate = useNavigate();
+  const { state } = useLocation();
+  console.log('SearchList' + state.gu);
+  console.log('SearchList' + state.tags);
+
+  useEffect(() => {
+    if( state.gu && state.tags ) {
+      console.log('submit');
+      axios.get(`${apiUrl}guide/recommend`,
+               {params: {keyword: state.tags,
+                        region:state.gu}})
+      .then(function (response) {
+          // response  
+          console.log(response.data);
+          if(response.count > 0 ) {
+            //renderFunction
+          }
+          else {
+            //검색 결과가 없습니다.
+          }
+      }).catch(function (error) {
+          // 오류발생시 실행
+      }).then(function() {
+          // 항상 실행
+      });
+
+    }
+  })
 
   const showResult = (event) => {
     navigate("/searchplacebyname");
