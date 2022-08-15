@@ -19,7 +19,7 @@ import SearchPlaceByGu from "./page/map/SearchPlaceByGu";
 import Register from "./page/login/Register";
 import SearchPlaceByInput from "./page/map/SearchPlaceByInput";
 
-const apiUrl = "http://127.0.0.1:8000/";
+const apiUrl = "http://15.164.98.6:8080/";
 const App = () => {
   return (
     <Routes>
@@ -59,8 +59,10 @@ const App = () => {
         ></Route>
         <Route path="/searchlist" element={<SearchList />}></Route>
         <Route path="/searchplacebygu" element={<SearchPlaceByGu />}></Route>
-        <Route path="/searchplacebyinput" element={<SearchPlaceByInput />}></Route>
-        
+        <Route
+          path="/searchplacebyinput"
+          element={<SearchPlaceByInput />}
+        ></Route>
       </Route>
     </Routes>
   );

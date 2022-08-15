@@ -8,16 +8,78 @@ import KeywordGroup from "./KeywordGroup";
 import { HiOutlineHashtag } from "react-icons/hi";
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const WriteRandom = ({ apiUrl }) => {
-  // api
-  const [title, setTitle] = useState(null);
+  // post api
+  const [inputs, setInputs] = useState({
+    date: "",
+    place: "",
+    cost: "",
+    title: "",
+    body: "",
+    address: "",
+    star: "",
+    tag: "",
+    image: "",
+  });
+
+  //onChange 함수 만들어주기
+  const changeInput = (e) => {
+    const newInputs = { ...inputs };
+    newInputs[e.target.name] = e.target.value;
+    setInputs(newInputs);
+    console.log(newInputs);
+  };
+
+  const access = cookies.get("access_token");
+  const onSubmit = (e) => {
+    e.preventDefault();
+    let formData = new FormData();
+    const config = {
+      headers: {
+        "content-Type": "multipart/form-data",
+        Authorization: `Bearer ${access}`,
+      },
+    };
+    formData.append("date", inputs.date);
+    formData.append("place", inputs.place);
+    formData.append("cost", inputs.cost);
+    formData.append("title", inputs.title);
+    formData.append("body", inputs.body);
+    formData.append("address", inputs.address);
+    formData.append("star", inputs.star);
+    formData.append("tag", inputs.tag);
+    for (let i = 0; i < inputs.image.length; i++) {
+      formData.append("image", inputs.image[i]);
+    }
+    axios
+      .post(
+        `${apiUrl}guide/`,
+
+        formData,
+
+        config
+      )
+      .then((res) => {
+        console.log(res.data);
+      });
+  };
+
+  // 랜덤 제목 api
+  const [atitle, setAtitle] = useState(null);
+  inputs.title = atitle;
 
   useEffect(() => {
     axios
-      .get(`${apiUrl}guide/randomguide/`)
+      .get(`${apiUrl}guide/randomguide/`, {
+        headers: {
+          Authorization: `Bearer ${access}`,
+        },
+      })
       .then((response) => {
-        setTitle(response.data.title);
+        setAtitle(response.data.title);
       })
       .catch(function (error) {
         console.log(error);
@@ -26,6 +88,27 @@ const WriteRandom = ({ apiUrl }) => {
   // 랜덤 제목
 
   const navigate = useNavigate();
+
+  // 주소
+  const [ad, setAd] = useState("");
+  const getAd = (gad) => {
+    setAd(gad);
+    inputs.address = gad;
+  };
+
+  // 사진
+  const [ph, setPh] = useState([]);
+  const getPh = (gph) => {
+    setPh([...ph, gph]);
+    inputs.image = gph;
+    console.log(inputs.image);
+  };
+
+  const getdPh = (gph) => {
+    setPh([gph]);
+    inputs.image = gph;
+    console.log(inputs.image);
+  };
 
   //별점
   const [clicked, setClicked] = useState([false, false, false, false, false]);
@@ -46,7 +129,7 @@ const WriteRandom = ({ apiUrl }) => {
   const sendReview = () => {
     let starScore = clicked.filter(Boolean).length;
     console.log(starScore);
-    //api
+    inputs.star = starScore;
   };
 
   //태그
@@ -55,6 +138,7 @@ const WriteRandom = ({ apiUrl }) => {
   const getTag = (gtags) => {
     setTags([...tags, gtags]);
     setTagTrue(true);
+    inputs.tag = JSON.stringify([...tags, gtags]);
   };
 
   const resetTag = (e) => {
@@ -72,8 +156,6 @@ const WriteRandom = ({ apiUrl }) => {
     }
     setCount(e.target.value.length);
   };
-  // 사진 첨부
-  const [imageSrc, setImageSrc] = useState([]);
 
   // 모달창
   const [modalOpen, setModalOpen] = useState(false);
@@ -89,7 +171,12 @@ const WriteRandom = ({ apiUrl }) => {
       <Wrapper>
         <MainTitle>랜덤 가이드 작성하기</MainTitle>
         <Box>
-          <Address />
+          <Address
+            name="address"
+            value={inputs.address}
+            onChange={changeInput}
+            getAd={getAd}
+          />
           <Star>
             <StarDiv>
               {starArray.map((el, idx) => {
@@ -99,6 +186,8 @@ const WriteRandom = ({ apiUrl }) => {
                     onClick={() => handleStarClick(el)}
                     className={clicked[el] && "greenStar"}
                     size="22"
+                    name="star"
+                    value={inputs.star}
                   />
                 );
               })}
@@ -106,19 +195,43 @@ const WriteRandom = ({ apiUrl }) => {
           </Star>
           <Title>
             <SubTitle>제목 : </SubTitle>
-            <ContentTitle>{title}</ContentTitle>
+            <ContentTitle
+              type="text"
+              name="title"
+              value={inputs.title}
+              onChange={changeInput}
+            >
+              {atitle}
+            </ContentTitle>
           </Title>
           <Date>
             <Sub>날짜</Sub>
-            <ContentDate type="text"></ContentDate>
+            <ContentDate
+              type="text"
+              name="date"
+              placeholder="0000-00-00"
+              value={inputs.date}
+              onChange={changeInput}
+            ></ContentDate>
           </Date>
           <Place>
             <Sub>방문한 장소명</Sub>
-            <ContentPlace type="text"></ContentPlace>
+            <ContentPlace
+              type="text"
+              name="place"
+              value={inputs.place}
+              onChange={changeInput}
+            ></ContentPlace>
           </Place>
           <Expense>
             <Sub>지출 금액</Sub>
-            <ContentNum type="number" placeholder="숫자로 작성"></ContentNum>
+            <ContentNum
+              type="number"
+              placeholder="숫자로 작성"
+              name="cost"
+              value={inputs.cost}
+              onChange={changeInput}
+            ></ContentNum>
           </Expense>
           <MainText>
             <SubText>본문</SubText>
@@ -128,11 +241,20 @@ const WriteRandom = ({ apiUrl }) => {
                 placeholder="최대 500자"
                 rows="6"
                 onInput={onInput}
+                name="body"
+                value={inputs.body}
+                onChange={changeInput}
               ></ContentText>
               <Counter>({count === "" ? 0 : count}/500)</Counter>
             </ContentWrapper>
           </MainText>
-          <UploadPhoto setImages={setImageSrc}></UploadPhoto>
+          <UploadPhoto
+            getPh={getPh}
+            getdPh={getdPh}
+            name="image"
+            value={inputs.image}
+            onChange={changeInput}
+          ></UploadPhoto>
           <SelectTag>
             <Sub>
               <TagDiv>
@@ -144,12 +266,18 @@ const WriteRandom = ({ apiUrl }) => {
                 close={closeModal}
                 header="키워드로 맞춤 장소 찾기"
               >
-                <KeywordGroup tags={tags} getTag={getTag} />
+                <KeywordGroup getTag={getTag} onChange={changeInput} />
               </TagModal>
             </Sub>
             <Tags>
               {tags.map((tag) => (
-                <TagList tag={tag} key={tag}>
+                <TagList
+                  tag={tag}
+                  key={tag}
+                  name="tag"
+                  value={inputs.tag}
+                  onChange={changeInput}
+                >
                   {tag}
                 </TagList>
               ))}
@@ -159,7 +287,7 @@ const WriteRandom = ({ apiUrl }) => {
         </Box>
         <BottomBtn>
           <CancelBtn onClick={() => navigate(-1)}>취소하기</CancelBtn>
-          <SubmitBtn>저장하기</SubmitBtn>
+          <SubmitBtn onClick={onSubmit}>저장하기</SubmitBtn>
         </BottomBtn>
       </Wrapper>
     </Container>

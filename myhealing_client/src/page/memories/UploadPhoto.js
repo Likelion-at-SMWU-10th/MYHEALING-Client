@@ -11,7 +11,7 @@ import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 
 SwiperCore.use([Navigation, Pagination]);
 
-const UploadPhoto = ({ getPh }) => {
+const UploadPhoto = ({ getPh, getdPh }) => {
   //부모
   const clickPh = (e) => {
     console.log(e);
@@ -20,18 +20,24 @@ const UploadPhoto = ({ getPh }) => {
 
   //사진 첨부
   const [img, setImg] = useState([]);
+  const [imgFile, setImgFile] = useState([]);
   const addImg = (e) => {
     const nowSelectImgList = e.target.files;
     console.log(nowSelectImgList[0]);
-    clickPh(nowSelectImgList[0]);
+    //clickPh(nowSelectImgList[0]);
     const nowImgUrlList = [...img];
+    const nowImgFileList = [...imgFile];
     for (let i = 0; i < nowSelectImgList.length; i += 1) {
       const nowImgUrl = URL.createObjectURL(nowSelectImgList[i]);
       nowImgUrlList.push(nowImgUrl);
+      nowImgFileList.push(nowSelectImgList[i]);
       //clickPh(nowImgUrl);
+
+      clickPh(nowImgFileList);
     }
 
     setImg(nowImgUrlList);
+    setImgFile(nowImgFileList);
 
     //e.target.value = "";
   };
@@ -39,10 +45,14 @@ const UploadPhoto = ({ getPh }) => {
   const deleteImg = (e) => {
     const nowIdx = e.target.value;
     const copyMyImg = [...img];
+    const copyMyImgFile = [...imgFile];
 
     copyMyImg.splice(nowIdx, 1);
+    copyMyImgFile.splice(nowIdx, 1);
 
     setImg(copyMyImg);
+    setImgFile(copyMyImgFile);
+    getdPh(copyMyImgFile);
   };
 
   return (
