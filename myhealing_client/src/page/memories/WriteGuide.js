@@ -27,11 +27,6 @@ const WriteGuide = ({ apiUrl }) => {
     image: "",
   });
 
-  //tag 반복문
-  // const newTag = inputs.tag.map(function (a) {
-  //   return a;
-  // });
-
   //onChange 함수 만들어주기
   const changeInput = (e) => {
     const newInputs = { ...inputs };
@@ -86,7 +81,13 @@ const WriteGuide = ({ apiUrl }) => {
   const [ph, setPh] = useState([]);
   const getPh = (gph) => {
     setPh([...ph, gph]);
-    inputs.image = [...ph, gph];
+    inputs.image = gph;
+    console.log(inputs.image);
+  };
+
+  const getdPh = (gph) => {
+    setPh([gph]);
+    inputs.image = gph;
     console.log(inputs.image);
   };
 
@@ -110,7 +111,6 @@ const WriteGuide = ({ apiUrl }) => {
     let starScore = clicked.filter(Boolean).length;
     console.log(starScore);
     inputs.star = starScore;
-    //api
   };
 
   //태그
@@ -137,8 +137,6 @@ const WriteGuide = ({ apiUrl }) => {
     }
     setCount(e.target.value.length);
   };
-  // 사진 첨부
-  const [imageSrc, setImageSrc] = useState([]);
 
   // 모달창
   const [modalOpen, setModalOpen] = useState(false);
@@ -191,6 +189,7 @@ const WriteGuide = ({ apiUrl }) => {
             <ContentDate
               type="text"
               name="date"
+              placeholder="0000-00-00"
               value={inputs.date}
               onChange={changeInput}
             ></ContentDate>
@@ -230,8 +229,8 @@ const WriteGuide = ({ apiUrl }) => {
             </ContentWrapper>
           </MainText>
           <UploadPhoto
-            setImages={setImageSrc}
             getPh={getPh}
+            getdPh={getdPh}
             name="image"
             value={inputs.image}
             onChange={changeInput}
