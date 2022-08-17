@@ -6,6 +6,8 @@ import UploadPhoto from "./UploadPhoto";
 import Swal from "sweetalert2";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import instance from "../login/instance";
+
 const cookies = new Cookies();
 
 const WriteMemories = ({ apiUrl }) => {
@@ -72,7 +74,7 @@ const WriteMemories = ({ apiUrl }) => {
       console.log(value);
     }
 
-    axios
+    instance
       .post(
         `${apiUrl}memory/`,
 
