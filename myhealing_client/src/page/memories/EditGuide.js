@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Address from "./Address";
 import UploadPhoto from "./UploadPhoto";
@@ -9,12 +9,150 @@ import { HiOutlineHashtag } from "react-icons/hi";
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper.min.css";
+import "swiper/components/zoom/zoom.min.css";
+import "swiper/components/navigation/navigation.min.css";
+import "swiper/components/pagination/pagination.min.css";
+import SwiperCore, { Navigation, Pagination } from "swiper";
 import Swal from "sweetalert2";
+
+SwiperCore.use([Navigation, Pagination]);
 const cookies = new Cookies();
 
 /*포커스기능주기*/
 
-const WriteGuide = ({ apiUrl }) => {
+const EditGuide = ({ apiUrl }) => {
+  const Params = useParams();
+
+  const photoAlert = () => {
+    setTimeout(() => {
+      Swal.fire({
+        title: "사진을 다시 올리시겠습니까?",
+        text: "확인을 누르면 기존 사진은 초기화됩니다.",
+        icon: "warning",
+        showCancelButton: false,
+        confirmButtonColor: "#73bd88",
+        confirmButtonText: "확인",
+        cancelButtonText: "취소",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          inputs.fileChange = true;
+          console.log(inputs.fileChange);
+        } else {
+          console.log(inputs.fileChange);
+          console.log(inputs.image);
+        }
+      });
+    }, 2000);
+  };
+
+  const [ta, setTa] = useState(false);
+  const tagAlert = () => {
+    Swal.fire({
+      title: "태그를 수정하시겠습니까?",
+      text: "확인을 누르면 기존 태그는 초기화됩니다.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#73bd88",
+      confirmButtonText: "확인",
+      cancelButtonText: "취소",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        openModal();
+        setTa(true);
+      } else {
+      }
+    });
+  };
+
+  const [inputs, setInputs] = useState({
+    date: "",
+    place: "",
+    cost: "",
+    title: "",
+    body: "",
+    address: "",
+    star: "",
+    tag: "",
+    image: "",
+    fileChange: false,
+  });
+
+  //onChange 함수 만들어주기
+  const changeInput = (e) => {
+    const newInputs = { ...inputs };
+    newInputs[e.target.name] = e.target.value;
+    setInputs(newInputs);
+    console.log(newInputs);
+  };
+  const [ima, setIma] = useState([]);
+  const [ntag, setNtag] = useState([]);
+
+  // 게시글 조회 api
+  useEffect(() => {
+    axios
+      .get(`${apiUrl}guide/${Params.guideID}`, {
+        headers: {
+          Authorization: `Bearer ${access}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        setInputs({
+          address: response.data.address,
+          star: response.data.star,
+          title: response.data.title,
+          date: response.data.date,
+          place: response.data.place,
+          cost: response.data.cost,
+          body: response.data.body,
+          image: response.data.images,
+          tag: response.data.tag,
+        });
+        setIma(() => {
+          return response.data.images;
+          console.log(ima);
+        });
+        setNtag(() => {
+          return response.data.tag;
+        });
+        console.log(ima);
+        console.log(inputs.tag);
+        // setAddress(response.data.address);
+        // setStar(response.data.star);
+        // setTitle(response.data.title);
+        // setDate(response.data.date);
+        // setPlace(response.data.place);
+        // setCost(response.data.cost);
+        // setBody(response.data.body);
+        // setImage(response.data.images);
+        // setNtag(response.data.tag);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log(ima);
+  }, [ima]);
+
+  // const [address, setAddress] = useState(null);
+  // const [star, setStar] = useState(null);
+  // const [title, setTitle] = useState(null);
+  // const [date, setDate] = useState("");
+  // const [place, setPlace] = useState(null);
+  // const [cost, setCost] = useState(null);
+  // const [body, setBody] = useState(null);
+  // const [image, setImage] = useState([]);
+  // const [ntag, setNtag] = useState([]);
+  // const [fileChange, setFileChange] = useState(false);
+  //api 연결
+
+  const navigate = useNavigate();
+  const access = cookies.get("access_token");
+
   const submitAlert = () => {
     Swal.fire({
       title: "저장하시겠습니까?",
@@ -30,30 +168,7 @@ const WriteGuide = ({ apiUrl }) => {
       }
     });
   };
-
-  //api 연결
-  const [inputs, setInputs] = useState({
-    date: "",
-    place: "",
-    cost: "",
-    title: "",
-    body: "",
-    address: "",
-    star: "",
-    tag: "",
-    image: "",
-  });
-
-  //onChange 함수 만들어주기
-  const changeInput = (e) => {
-    const newInputs = { ...inputs };
-    newInputs[e.target.name] = e.target.value;
-    setInputs(newInputs);
-    console.log(newInputs);
-  };
-
-  const navigate = useNavigate();
-  const access = cookies.get("access_token");
+  const groupTag = [];
 
   const onSubmit = (e) => {
     let formData = new FormData();
@@ -70,14 +185,33 @@ const WriteGuide = ({ apiUrl }) => {
     formData.append("body", inputs.body);
     formData.append("address", inputs.address);
     formData.append("star", inputs.star);
-    formData.append("tag", inputs.tag);
+    if (!ta) {
+      for (let i = 0; i < inputs.tag.length; i++) {
+        groupTag.push(inputs.tag[i].title);
+      }
+      formData.append("tag", JSON.stringify(groupTag));
+    } else {
+      formData.append("tag", JSON.stringify(inputs.tag));
+    }
+
+    if (inputs.fileChange) {
+      formData.append("file_change", inputs.fileChange);
+    }
     for (let i = 0; i < inputs.image.length; i++) {
       formData.append("image", inputs.image[i]);
     }
+    // FormData의 key 확인
+    for (let key of formData.keys()) {
+      console.log(key);
+    }
 
+    // FormData의 value 확인
+    for (let value of formData.values()) {
+      console.log(value);
+    }
     axios
-      .post(
-        `${apiUrl}guide/`,
+      .put(
+        `${apiUrl}guide/${Params.guideID}`,
 
         formData,
 
@@ -99,6 +233,7 @@ const WriteGuide = ({ apiUrl }) => {
   };
 
   // 사진
+
   const [ph, setPh] = useState([]);
   const getPh = (gph) => {
     setPh([...ph, gph]);
@@ -140,7 +275,7 @@ const WriteGuide = ({ apiUrl }) => {
   const getTag = (gtags) => {
     setTags([...tags, gtags]);
     setTagTrue(true);
-    inputs.tag = JSON.stringify([...tags, gtags]);
+    inputs.tag = [...tags, gtags];
   };
 
   const resetTag = (e) => {
@@ -249,18 +384,45 @@ const WriteGuide = ({ apiUrl }) => {
               <Counter>({count === "" ? 0 : count}/500)</Counter>
             </ContentWrapper>
           </MainText>
-          <UploadPhoto
-            getPh={getPh}
-            getdPh={getdPh}
-            name="image"
-            value={inputs.image}
-            onChange={changeInput}
-          ></UploadPhoto>
+          <PhotoList>
+            <SwiperImg
+              slidesPerView={1}
+              navigation
+              pagination={{ clickable: true }}
+            >
+              {ima &&
+                ima.map((i) => {
+                  return (
+                    <SwiperSlide key={i.id}>
+                      <ImgContainer>
+                        <ImgDiv>
+                          <ImageList
+                            src={`http://15.164.98.6:8080${i.image}`}
+                            key={i.id}
+                          ></ImageList>
+                        </ImgDiv>
+                      </ImgContainer>
+                    </SwiperSlide>
+                  );
+                })}
+            </SwiperImg>
+          </PhotoList>
+          <PhDiv>
+            <UploadPhoto
+              getPh={getPh}
+              getdPh={getdPh}
+              name="image"
+              value={inputs.image}
+              onChange={changeInput}
+              sendImage={ima}
+              onClick={photoAlert}
+            ></UploadPhoto>
+          </PhDiv>
           <SelectTag>
             <Sub>
               <TagDiv>
                 <HiOutlineHashtag size="19" color="#73bd88" />
-                <TagBtn onClick={openModal}>태그 선택</TagBtn>
+                <TagBtn onClick={tagAlert}>태그 선택</TagBtn>
               </TagDiv>
               <TagModal
                 open={modalOpen}
@@ -271,18 +433,36 @@ const WriteGuide = ({ apiUrl }) => {
               </TagModal>
             </Sub>
             <Tags>
-              {tags.map((tag) => (
-                <TagList
-                  tag={tag}
-                  key={tag}
-                  name="tag"
-                  value={inputs.tag}
-                  onChange={changeInput}
-                >
-                  {tag}
-                </TagList>
-              ))}
-              {tagTrue ? <Reset onClick={resetTag}>x</Reset> : null}
+              {ta ? (
+                <NewTag>
+                  {tags.map((t) => (
+                    <TagList
+                      tag={t}
+                      key={t}
+                      name="tag"
+                      value={inputs.tag}
+                      onChange={changeInput}
+                    >
+                      {t}
+                    </TagList>
+                  ))}
+                  {tagTrue ? <Reset onClick={resetTag}>x</Reset> : null}
+                </NewTag>
+              ) : (
+                <NewTag>
+                  {ntag.map((t) => (
+                    <TagList
+                      tag={t}
+                      key={t.title}
+                      name="tag"
+                      value={inputs.tag}
+                      onChange={changeInput}
+                    >
+                      {t.title}
+                    </TagList>
+                  ))}{" "}
+                </NewTag>
+              )}
             </Tags>
           </SelectTag>
         </Box>
@@ -417,6 +597,52 @@ const MainText = styled.div`
   flex-direction: row;
   width: 40rem;
 `;
+
+const PhotoList = styled.div`
+  width: 80%;
+  margin: 0rem auto 0 auto;
+  & .swiper-button-prev {
+    display: none;
+  }
+
+  & .swiper-button-next {
+    display: none;
+  }
+  & .swiper-pagination {
+  }
+
+  & .swiper-pagination-bullet {
+    background-color: #73bd88;
+    margin: 0 5px !important;
+  }
+`;
+
+const SwiperImg = styled(Swiper)`
+  width: auto;
+  height: 14rem;
+`;
+
+const ImgContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+`;
+
+const ImgDiv = styled.div`
+  width: auto;
+  height: 85%;
+`;
+
+const ImageList = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+const PhDiv = styled.div``;
+
 const SubText = styled.div`
   margin: 0.5rem 0.5rem 0rem 2rem;
 `;
@@ -479,6 +705,16 @@ const Reset = styled.button`
   background-color: #ffffff;
   color: #73bd88;
   padding: 0.5rem;
+`;
+
+const NewTag = styled.div`
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.6rem;
+  flex-wrap: wrap;
 `;
 
 const TagList = styled.div`
@@ -555,4 +791,4 @@ const SubmitBtn = styled.button`
   }
 `;
 
-export default WriteGuide;
+export default EditGuide;

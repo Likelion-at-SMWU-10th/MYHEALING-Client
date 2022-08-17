@@ -3,9 +3,112 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Address from "./Address";
 import UploadPhoto from "./UploadPhoto";
+import Swal from "sweetalert2";
+import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
-const WriteMemories = () => {
+const WriteMemories = ({ apiUrl }) => {
+  const submitAlert = () => {
+    Swal.fire({
+      title: "저장하시겠습니까?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#73bd88",
+      confirmButtonText: "확인",
+      cancelButtonText: "취소",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        onSubmit();
+      } else {
+      }
+    });
+  };
+
+  //api 연결
+  const [inputs, setInputs] = useState({
+    date: "",
+    place: "",
+    title: "",
+    body: "",
+    address: "",
+    image: "",
+  });
+
+  //onChange 함수 만들어주기
+  const changeInput = (e) => {
+    const newInputs = { ...inputs };
+    newInputs[e.target.name] = e.target.value;
+    setInputs(newInputs);
+    console.log(newInputs);
+  };
+
   const navigate = useNavigate();
+  const access = cookies.get("access_token");
+
+  const onSubmit = (e) => {
+    let formData = new FormData();
+    const config = {
+      headers: {
+        "content-Type": "multipart/form-data",
+        Authorization: `Bearer ${access}`,
+      },
+    };
+    formData.append("date", inputs.date);
+    formData.append("place", inputs.place);
+    formData.append("title", inputs.title);
+    formData.append("body", inputs.body);
+    formData.append("address", inputs.address);
+    for (let i = 0; i < inputs.image.length; i++) {
+      formData.append("image", inputs.image[i]);
+    }
+    // FormData의 key 확인
+    for (let key of formData.keys()) {
+      console.log(key);
+    }
+
+    // FormData의 value 확인
+    for (let value of formData.values()) {
+      console.log(value);
+    }
+
+    axios
+      .post(
+        `${apiUrl}memory/`,
+
+        formData,
+
+        config
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // 주소
+  const [ad, setAd] = useState("");
+  const getAd = (gad) => {
+    setAd(gad);
+    inputs.address = gad;
+  };
+
+  // 사진
+  const [ph, setPh] = useState([]);
+  const getPh = (gph) => {
+    setPh([...ph, gph]);
+    inputs.image = gph;
+    console.log(inputs.image);
+  };
+
+  const getdPh = (gph) => {
+    setPh([gph]);
+    inputs.image = gph;
+    console.log(inputs.image);
+  };
+
   // <ContentText> 글자수 제한
   const [count, setCount] = useState("");
   const onInput = (e) => {
@@ -15,27 +118,46 @@ const WriteMemories = () => {
     }
     setCount(e.target.value.length);
   };
-  // 사진 첨부
-  const [imageSrc, setImageSrc] = useState([]);
 
   return (
     <Container>
       <Wrapper>
         <MainTitle>오늘의 추억 남기기</MainTitle>
         <Box>
-          <Address />
+          <Address
+            name="address"
+            value={inputs.address}
+            onChange={changeInput}
+            getAd={getAd}
+          />
           <LockImg src={"/img/lock.svg"} />
           <Title>
             <SubTitle>제목 : </SubTitle>
-            <ContentTitle type="text"></ContentTitle>
+            <ContentTitle
+              type="text"
+              name="title"
+              value={inputs.title}
+              onChange={changeInput}
+            ></ContentTitle>
           </Title>
           <Date>
             <Sub>날짜</Sub>
-            <ContentDate type="text"></ContentDate>
+            <ContentDate
+              type="text"
+              name="date"
+              placeholder="0000-00-00"
+              value={inputs.date}
+              onChange={changeInput}
+            ></ContentDate>
           </Date>
           <Place>
             <Sub>방문한 장소명</Sub>
-            <ContentPlace type="text"></ContentPlace>
+            <ContentPlace
+              type="text"
+              name="place"
+              value={inputs.place}
+              onChange={changeInput}
+            ></ContentPlace>
           </Place>
           <MainText>
             <SubText>본문</SubText>
@@ -45,15 +167,24 @@ const WriteMemories = () => {
                 placeholder="최대 500자"
                 rows="6"
                 onInput={onInput}
+                name="body"
+                value={inputs.body}
+                onChange={changeInput}
               ></ContentText>
               <Counter>({count === "" ? 0 : count}/500)</Counter>
             </ContentWrapper>
           </MainText>
-          <UploadPhoto setImages={setImageSrc}></UploadPhoto>
+          <UploadPhoto
+            getPh={getPh}
+            getdPh={getdPh}
+            name="image"
+            value={inputs.image}
+            onChange={changeInput}
+          ></UploadPhoto>
         </Box>
         <BottomBtn>
           <CancelBtn onClick={() => navigate(-1)}>취소하기</CancelBtn>
-          <SubmitBtn>저장하기</SubmitBtn>
+          <SubmitBtn onClick={submitAlert}>저장하기</SubmitBtn>
         </BottomBtn>
       </Wrapper>
     </Container>

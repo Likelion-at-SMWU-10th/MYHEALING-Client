@@ -3,7 +3,7 @@ import styled from "styled-components";
 import DaumPostcode from "react-daum-postcode";
 import AddressModal from "./AddressModal";
 
-const Address = ({ getAd }) => {
+const Address = ({ getAd, value }) => {
   //부모
   const clickAd = (e) => {
     console.log(e);
@@ -36,7 +36,7 @@ const Address = ({ getAd }) => {
           type="text"
           placeholder="주소 검색"
           readOnly
-          value={kakaoAddress || ""}
+          value={kakaoAddress || value}
           onClick={openModal}
           name="address"
         />

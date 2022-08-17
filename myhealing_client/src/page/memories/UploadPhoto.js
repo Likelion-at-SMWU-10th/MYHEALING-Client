@@ -11,7 +11,7 @@ import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 
 SwiperCore.use([Navigation, Pagination]);
 
-const UploadPhoto = ({ getPh, getdPh }) => {
+const UploadPhoto = ({ getPh, getdPh, onClick }) => {
   //부모
   const clickPh = (e) => {
     console.log(e);
@@ -87,13 +87,17 @@ const UploadPhoto = ({ getPh, getdPh }) => {
         <AddLabel htmlFor="input-file" onChange={addImg}>
           <PDiv>
             <MdOutlineAddPhotoAlternate size="19" color="#73bd88" />
-            <Ptag>사진 첨부</Ptag>
+            <Ptag onClick={onClick}>사진 첨부</Ptag>
           </PDiv>
           <input
             type="file"
             multiple
             id="input-file"
-            style={{ display: "none", width: "100%", height: "100%" }}
+            style={{
+              display: "none",
+              width: "100%",
+              height: "100%",
+            }}
             accept="image/*"
           />
         </AddLabel>
@@ -154,6 +158,7 @@ const ImgDiv = styled.div`
   width: auto;
   height: 85%;
 `;
+
 const Imgs = styled.img`
   width: 100%;
   height: 100%;
