@@ -9,9 +9,26 @@ import { HiOutlineHashtag } from "react-icons/hi";
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import Swal from "sweetalert2";
 const cookies = new Cookies();
 
 const WriteRandom = ({ apiUrl }) => {
+  const submitAlert = () => {
+    Swal.fire({
+      title: "저장하시겠습니까?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#73bd88",
+      confirmButtonText: "확인",
+      cancelButtonText: "취소",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        onSubmit();
+      } else {
+      }
+    });
+  };
+
   // post api
   const [inputs, setInputs] = useState({
     date: "",
@@ -287,7 +304,7 @@ const WriteRandom = ({ apiUrl }) => {
         </Box>
         <BottomBtn>
           <CancelBtn onClick={() => navigate(-1)}>취소하기</CancelBtn>
-          <SubmitBtn onClick={onSubmit}>저장하기</SubmitBtn>
+          <SubmitBtn onClick={submitAlert}>저장하기</SubmitBtn>
         </BottomBtn>
       </Wrapper>
     </Container>
