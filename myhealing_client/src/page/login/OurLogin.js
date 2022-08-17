@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const cookies = new Cookies();
 
-const OurLogin = () => {
+const OurLogin = ({ apiUrl }) => {
   const [values, setValues] = useState({
     user_id: "",
     password: "",
@@ -25,7 +25,7 @@ const OurLogin = () => {
 
   const submitSignUp = () => {
     axios
-      .post("http://127.0.0.1:8000/login/", {
+      .post(`${apiUrl}login/`, {
         user_id: values.user_id,
         password: values.password,
       })

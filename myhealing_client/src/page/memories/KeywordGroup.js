@@ -15,7 +15,7 @@ const KeywordGroup = ({ tags, getTag }) => {
               <div className="topname">
                 <img
                   className="keywordicon"
-                  src="img/keyword/laughing 1.png"
+                  src="/img/keyword/laughing 1.png"
                   alt="Third slide"
                 />{" "}
                 <span className="toptitle">분위기</span>
@@ -57,7 +57,7 @@ const KeywordGroup = ({ tags, getTag }) => {
               <div className="topname">
                 <img
                   className="keywordicon"
-                  src="img/keyword/laughing 4.png"
+                  src="/img/keyword/laughing 4.png"
                   alt="Third slide"
                 />{" "}
                 <span className="toptitle">누구랑?</span>
@@ -94,7 +94,7 @@ const KeywordGroup = ({ tags, getTag }) => {
               <div className="topname">
                 <img
                   className="keywordicon"
-                  src="img/keyword/laughing 2.png"
+                  src="/img/keyword/laughing 2.png"
                   alt="Third slide"
                 />{" "}
                 <span className="toptitle">날씨</span>
@@ -123,7 +123,7 @@ const KeywordGroup = ({ tags, getTag }) => {
               <div className="topname">
                 <img
                   className="keywordicon"
-                  src="img/keyword/laughing 5.png"
+                  src="/img/keyword/laughing 5.png"
                   alt="Third slide"
                 />{" "}
                 <span className="toptitle">기타</span>
@@ -160,7 +160,7 @@ const KeywordGroup = ({ tags, getTag }) => {
           <div className="topname">
             <img
               className="keywordicon"
-              src="img/keyword/laughing 3.png"
+              src="/img/keyword/laughing 3.png"
               alt="Third slide"
             />{" "}
             <span className="toptitle">장소 특징</span>
