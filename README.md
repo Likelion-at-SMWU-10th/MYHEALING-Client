@@ -16,3 +16,5 @@ Project local 에서 돌리려면 설치해야 하는 yarn list
   (설치 오류나면 --legacy-peer-deps 이 옵션을 추가하세요!)
 10. yarn add universal-cookie
 11. yarn add sweetalert2     --> 찜하기 alert 창 디자인 때문에 설치했어요!
+12. yarn add immer redux-actions
+13. yarn add redux react-redux
