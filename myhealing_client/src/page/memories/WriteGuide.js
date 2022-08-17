@@ -10,6 +10,8 @@ import { FaStar } from "react-icons/fa";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import Swal from "sweetalert2";
+import instance from "../login/instance";
+
 const cookies = new Cookies();
 
 /*포커스기능주기*/
@@ -75,7 +77,7 @@ const WriteGuide = ({ apiUrl }) => {
       formData.append("image", inputs.image[i]);
     }
 
-    axios
+    instance
       .post(
         `${apiUrl}guide/`,
 

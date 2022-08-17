@@ -16,6 +16,7 @@ import "swiper/components/navigation/navigation.min.css";
 import "swiper/components/pagination/pagination.min.css";
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import Swal from "sweetalert2";
+import instance from "../login/instance";
 
 SwiperCore.use([Navigation, Pagination]);
 const cookies = new Cookies();
@@ -91,7 +92,7 @@ const EditGuide = ({ apiUrl }) => {
 
   // 게시글 조회 api
   useEffect(() => {
-    axios
+    instance
       .get(`${apiUrl}guide/${Params.guideID}`, {
         headers: {
           Authorization: `Bearer ${access}`,
@@ -112,22 +113,12 @@ const EditGuide = ({ apiUrl }) => {
         });
         setIma(() => {
           return response.data.images;
-          console.log(ima);
         });
         setNtag(() => {
           return response.data.tag;
         });
         console.log(ima);
         console.log(inputs.tag);
-        // setAddress(response.data.address);
-        // setStar(response.data.star);
-        // setTitle(response.data.title);
-        // setDate(response.data.date);
-        // setPlace(response.data.place);
-        // setCost(response.data.cost);
-        // setBody(response.data.body);
-        // setImage(response.data.images);
-        // setNtag(response.data.tag);
       })
       .catch(function (error) {
         console.log(error);
@@ -138,16 +129,6 @@ const EditGuide = ({ apiUrl }) => {
     console.log(ima);
   }, [ima]);
 
-  // const [address, setAddress] = useState(null);
-  // const [star, setStar] = useState(null);
-  // const [title, setTitle] = useState(null);
-  // const [date, setDate] = useState("");
-  // const [place, setPlace] = useState(null);
-  // const [cost, setCost] = useState(null);
-  // const [body, setBody] = useState(null);
-  // const [image, setImage] = useState([]);
-  // const [ntag, setNtag] = useState([]);
-  // const [fileChange, setFileChange] = useState(false);
   //api 연결
 
   const navigate = useNavigate();
@@ -164,6 +145,7 @@ const EditGuide = ({ apiUrl }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         onSubmit();
+        navigate(`/postGuide/${Params.guideID}`);
       } else {
       }
     });
@@ -209,7 +191,7 @@ const EditGuide = ({ apiUrl }) => {
     for (let value of formData.values()) {
       console.log(value);
     }
-    axios
+    instance
       .put(
         `${apiUrl}guide/${Params.guideID}`,
 
@@ -307,7 +289,7 @@ const EditGuide = ({ apiUrl }) => {
   return (
     <Container>
       <Wrapper>
-        <MainTitle>가이드 작성하기</MainTitle>
+        <MainTitle>가이드 수정하기</MainTitle>
         <Box>
           <Address
             name="address"
@@ -708,7 +690,7 @@ const Reset = styled.button`
 `;
 
 const NewTag = styled.div`
-  width: 70%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   margin-left: 1rem;

@@ -15,6 +15,7 @@ import "swiper/components/navigation/navigation.min.css";
 import "swiper/components/pagination/pagination.min.css";
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import Swal from "sweetalert2";
+import instance from "../login/instance";
 
 SwiperCore.use([Navigation, Pagination]);
 const cookies = new Cookies();
@@ -48,7 +49,7 @@ const PostPage = ({ apiUrl }) => {
       cancelButtonText: "취소",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
+        instance
           .delete(`${apiUrl}guide/${Params.guideID}`, {
             headers: {
               Authorization: `Bearer ${access}`,
@@ -64,7 +65,7 @@ const PostPage = ({ apiUrl }) => {
 
   // 찜하기 post api
   const iLikeIt = (e) => {
-    axios
+    instance
       .post(`${apiUrl}guide/love/${Params.guideID}`, null, {
         headers: {
           Authorization: `Bearer ${access}`,
@@ -78,7 +79,7 @@ const PostPage = ({ apiUrl }) => {
 
   // 찜하기 delete api
   const iHateIt = (e) => {
-    axios
+    instance
       .delete(`${apiUrl}guide/love/${Params.guideID}`, {
         headers: {
           Authorization: `Bearer ${access}`,
@@ -92,7 +93,7 @@ const PostPage = ({ apiUrl }) => {
 
   // 게시글 조회 api
   useEffect(() => {
-    axios
+    instance
       .get(`${apiUrl}guide/${Params.guideID}`, {
         headers: {
           Authorization: `Bearer ${access}`,
@@ -500,7 +501,7 @@ const TagDiv = styled.div`
 `;
 
 const Tags = styled.div`
-  width: 70%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   margin-left: 1rem;

@@ -10,6 +10,8 @@ import { FaStar } from "react-icons/fa";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import Swal from "sweetalert2";
+import instance from "../login/instance";
+
 const cookies = new Cookies();
 
 const WriteRandom = ({ apiUrl }) => {
@@ -52,7 +54,6 @@ const WriteRandom = ({ apiUrl }) => {
 
   const access = cookies.get("access_token");
   const onSubmit = (e) => {
-    e.preventDefault();
     let formData = new FormData();
     const config = {
       headers: {
@@ -71,7 +72,7 @@ const WriteRandom = ({ apiUrl }) => {
     for (let i = 0; i < inputs.image.length; i++) {
       formData.append("image", inputs.image[i]);
     }
-    axios
+    instance
       .post(
         `${apiUrl}guide/`,
 
@@ -89,7 +90,7 @@ const WriteRandom = ({ apiUrl }) => {
   inputs.title = atitle;
 
   useEffect(() => {
-    axios
+    instance
       .get(`${apiUrl}guide/randomguide/`, {
         headers: {
           Authorization: `Bearer ${access}`,
