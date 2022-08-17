@@ -6,7 +6,11 @@ import "./SearchPlace.css";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-function SearchPlace() {
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+import axios from 'axios';
+
+function SearchPlace({ apiUrl }) {
   const navigate = useNavigate();
   const { state } = useLocation();
 
@@ -60,7 +64,42 @@ function SearchPlace() {
       "gu":{state}.state,
       "tags":JSON.stringify(tags)
     }
-    navigate("/searchlist",{state:sendData});
+    
+    if( sendData.gu && sendData.tags ) {
+      console.log('submit');
+
+      const access = cookies.get("access_token");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${access}`,
+        },
+      };
+      axios.get(`${apiUrl}guide/recommend/`,
+               {params: {keyword: sendData.tags,
+                        region:sendData.gu}},config)
+      .then(function (response) {
+          // response  
+          console.log(response.data.results);
+
+          if(response.data.length > 0 ) {
+            //renderFunction
+           // console.log('response: '+response);
+            navigate("/searchlist",{state:response.data.results});
+          
+            //setLists(response.data)
+          }
+          else {
+            //검색 결과가 없습니다.
+            alert("검색 결과가 없습니다 !!");
+          }
+      }).catch(function (error) {
+          // 오류발생시 실행
+      }).then(function() {
+          // 항상 실행
+      });
+
+    }
+
   };
 
   const setSearchText = (value) => {
