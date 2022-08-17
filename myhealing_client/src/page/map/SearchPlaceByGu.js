@@ -176,7 +176,7 @@ const SearchPlaceByGu = () => {
         <Wrapper>
             <GuListss>
                 {gus.map(gu => (
-                    <GuLists gu={gu} />
+                    <GuLists key={gu.id} gu={gu} />
                 ))}
             </GuListss>
         </Wrapper>

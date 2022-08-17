@@ -1,65 +1,44 @@
 import React from "react";
 import styled from "styled-components";
 import "./SearchList.css";
-import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from 'react-router-dom';
 
-function SearchList() {
+
+function SearchList({ apiUrl }) {
   const navigate = useNavigate();
+  const { state } = useLocation();
+
+  useEffect(() => {
+    console.log(state);
+  },[]);
+
 
   const showResult = (event) => {
     navigate("/searchplacebyname");
     console.log('in');
   };
+
   
   return (
     <>
       <Wrapper>
+
         <div className="list-group wrapbox">
-            <a onClick={()=> showResult()} className="list-group-item list-group-item-action">
-                <img src="img/search/me.svg" className=""></img>
-                <Texts>감자</Texts>
-                <Texts>2022.07.14</Texts>
-                <div className="d-flex w-100 justify-content-between">
-                <h5 className="mb-1 addmargin">2022 광화문 핫플레이스 모음</h5>
-                <small>3일전</small>
-                </div>
-                <p className="mb-1"></p>
-                <small className="addmargin">여름에 힐링하러 가기 좋은 광화문 에 다녀왔어요~! 그 중 좋았던 곳을 추천 어쩌고 ...어쩌고</small>
-            </a>
-            <a onClick={()=> showResult()} className="list-group-item list-group-item-action">
-                <img src="img/search/me.svg" className=""></img>
-                <Texts>감자</Texts>
-                <Texts>2022.07.14</Texts>
-                <div className="d-flex w-100 justify-content-between">
-                <h5 className="mb-1 addmargin">2022 광화문 핫플레이스 모음</h5>
-                <small>3일전</small>
-                </div>
-                <p className="mb-1"></p>
-                <small className="addmargin">여름에 힐링하러 가기 좋은 광화문 에 다녀왔어요~! 그 중 좋았던 곳을 추천 어쩌고 ...어쩌고</small>
-            </a>
-            <a onClick={()=> showResult()} className="list-group-item list-group-item-action">
-                <img src="img/search/me.svg" className=""></img>
-                <Texts>감자</Texts>
-                <Texts>2022.07.14</Texts>
-                <div className="d-flex w-100 justify-content-between">
-                <h5 className="mb-1 addmargin">2022 광화문 핫플레이스 모음</h5>
-                <small>3일전</small>
-                </div>
-                <p className="mb-1"></p>
-                <small className="addmargin">여름에 힐링하러 가기 좋은 광화문 에 다녀왔어요~! 그 중 좋았던 곳을 추천 어쩌고 ...어쩌고</small>
-            </a>
-            <a onClick={()=> showResult()} className="list-group-item list-group-item-action">
-                <img src="img/search/me.svg" className=""></img>
-                <Texts>감자</Texts>
-                <Texts>2022.07.14</Texts>
-                <div className="d-flex w-100 justify-content-between">
-                <h5 className="mb-1 addmargin">2022 광화문 핫플레이스 모음</h5>
-                <small>3일전</small>
-                </div>
-                <p className="mb-1"></p>
-                <small className="addmargin">여름에 힐링하러 가기 좋은 광화문 에 다녀왔어요~! 그 중 좋았던 곳을 추천 어쩌고 ...어쩌고</small>
-            </a>
+          {state.map((list) => {
+            return <a key={list.id} onClick={()=> showResult()} className="list-group-item list-group-item-action">
+                          <img src="img/search/me.svg" className=""></img>
+                          <Texts>감자2</Texts>
+                          <Texts>{list.created_at.substring(0,10)}</Texts>
+                          <div className="d-flex w-100 justify-content-between">
+                            <h5 className="mb-1 addmargin">{list.title}</h5>
+                            <small></small>
+                          </div>
+                          <p className="mb-1"></p>
+                          <small className="addmargin">{list.body?list.body:list.summary}</small>
+                        </a>
+                    })
+                }
             </div>
       </Wrapper>
     </>

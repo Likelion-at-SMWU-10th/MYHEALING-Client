@@ -5,16 +5,22 @@ import styled from "styled-components";
 import "./SearchPlace.css";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 import axios from 'axios';
 
-function SearchPlace() {
+function SearchPlace({ apiUrl }) {
   const navigate = useNavigate();
   const { state } = useLocation();
 
   const [tags, setTags] = useState([]);
   const [tagTrue, setTagTrue] = useState(false);
+
   const updateTags = (gtags) => {
     console.log('2' + gtags);
+    console.log('json : '+JSON.stringify(tags));
+
     setTags([...tags, gtags]);
     setTagTrue(true);
   };
@@ -54,18 +60,46 @@ function SearchPlace() {
   const searchFunction = (value) => {
     //event.preventDefault();
    // navigate("/searchplacebyname");
-    navigate("/searchlist");
+    const sendData = {
+      "gu":{state}.state,
+      "tags":JSON.stringify(tags)
+    }
     
-    console.log('submit');
-    axios.get("http://127.0.0.1:8000/guide/")
-    .then(function (response) {
-         // response  
-         console.log(response.data);
-    }).catch(function (error) {
-        // 오류발생시 실행
-    }).then(function() {
-        // 항상 실행
-    });
+    if( sendData.gu && sendData.tags ) {
+      console.log('submit');
+
+      const access = cookies.get("access_token");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${access}`,
+        },
+      };
+      axios.get(`${apiUrl}guide/recommend/`,
+               {params: {keyword: sendData.tags,
+                        region:sendData.gu}},config)
+      .then(function (response) {
+          // response  
+          console.log(response.data.results);
+
+          if(response.data.length > 0 ) {
+            //renderFunction
+           // console.log('response: '+response);
+            navigate("/searchlist",{state:response.data.results});
+          
+            //setLists(response.data)
+          }
+          else {
+            //검색 결과가 없습니다.
+            alert("검색 결과가 없습니다 !!");
+          }
+      }).catch(function (error) {
+          // 오류발생시 실행
+      }).then(function() {
+          // 항상 실행
+      });
+
+    }
+
   };
 
   const setSearchText = (value) => {

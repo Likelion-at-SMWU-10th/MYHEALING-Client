@@ -4,44 +4,86 @@ import "./SearchPlace.css";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios';
+import instance from '../login/instance';
 
-const SearchPlaceByInput = () => {
-  const searchFunction = (value) => {
-    //event.preventDefault();
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+
+const SearchPlaceByInput = ({apiUrl}) => {
+  const navigate = useNavigate();
+  const [option, setOption] = useState('mix')
+  const [search_text, setSearchText] = useState('')
+
+  const searchFunction = (e) => {
+    if(e) e.preventDefault();
    // navigate("/searchplacebyname");
-    navigate("/searchlist");
+
+   if(e.target.value) {
+     console.log(e.target.value)
+   }
     
-    console.log('submit');
-    axios.get("http://127.0.0.1:8000/guide/")
-    .then(function (response) {
-         // response  
-         console.log(response.data);
-    }).catch(function (error) {
-        // 오류발생시 실행
-    }).then(function() {
-        // 항상 실행
-    });
+   const access = cookies.get("access_token");
+   const config = {
+     headers: {
+       Authorization: `Bearer ${access}`,
+     },
+   };
+   console.log('search_text'+search_text)
+   instance.get(`guide/search/`,
+              {params: {filter: option,
+                       query:search_text}},config)
+   .then(function (response) {
+        // response  
+      console.log(response.data.results);
+        
+      navigate("/searchlist",{state:response.data.results});
+   }).catch(function (error) {
+        console.log(error);
+       // 오류발생시 실행
+   }).then(function() {
+       // 항상 실행
+   });
   };
 
+  const selecetOption = (e) => {
+    setOption(e.target.value)
+    console.log(e.target.value)
+  }
+
+  const changeText = (e) => {
+    console.log(e.target.value)
+    setSearchText(e.target.value)
+  }
+
+  const selectList = (e) => {
+    setSearchText(e.target.value)
+  }
     return (
         <div className='greensearch'>
             <div className="container">
-            <form onSubmit={() => searchFunction()}>
+            <form className='formsearchbox' onSubmit={searchFunction}>
                 <input
-                    className="input-group mb-3 topsearchbox"
+                    value={search_text}
+                    onChange={changeText}
+                    className="topsearchbox"
                 ></input>
+                <BtnSearch onClick={searchFunction}></BtnSearch>  
             </form>
             <SerachSide>
                 <Title>검색 필터 설정</Title>
                 <SubTitle>모든 검색어/ 제목만 / 내용만</SubTitle>
-                <Option>[모든 검색어]</Option>
-                <Option>[제목만]</Option>
-                <Option>[내용만]</Option>
+                <Option value="mix" onClick={selecetOption}>[모든 검색어]</Option>
+                <Option value="title" onClick={selecetOption}>[제목만]</Option>
+                <Option value="body" onClick={selecetOption}>[내용만]</Option>
+                <br/>
                 <img className="sampleImg" src="img/search/sampleimage.png" />
+                <Option>{option=="title"?"제목만":(option=="body"?"내용만":"모든 검색어")}</Option>
             </SerachSide>
-            <SearchHistory onClick={() => searchFunction("동작구")}>동작구</SearchHistory>
-            <SearchHistory onClick={() => searchFunction("광화문")}>광화문</SearchHistory>
-            <SearchHistory onClick={() => searchFunction("용산구")}>용산구</SearchHistory>
+            <br/>
+            <br/>
+            <SearchHistory value="동작구" onClick={selectList}>동작구</SearchHistory>
+            <SearchHistory value="광화문" onClick={selectList}>광화문</SearchHistory>
+            <SearchHistory value="용산구" onClick={selectList}>용산구</SearchHistory>
             <SearchHistory></SearchHistory>
             <SearchHistory></SearchHistory>
             <SearchHistory></SearchHistory>
@@ -49,6 +91,17 @@ const SearchPlaceByInput = () => {
         </div>
     );
 };
+const BtnSearch = styled.button`
+  background: url( "img/search/search.png" ) no-repeat;
+  border: none;
+  width: 25px;
+  height: 25px;
+
+  position: absolute;
+  right:485px;
+  top: 137px;
+
+`;
 
 const SerachSide = styled.div`
   box-sizing: border-box;
