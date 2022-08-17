@@ -12,6 +12,24 @@ code {
     monospace;
 }
 
+* {
+  font-family: "scoreR";
+}
+
+@font-face {
+  font-family: "NanumSquareRoundR";
+  src: url("styles/fonts/NanumSquareRoundR.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "scoreR";
+  src: url("styles/fonts/scdream4.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+}
+
 @font-face {
   font-family: "Comfortaa";
   font-style: normal;
