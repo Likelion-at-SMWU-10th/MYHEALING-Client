@@ -15,14 +15,18 @@ import SearchList from "./page/map/SearchList";
 import PostGuide from "./page/memories/PostGuide";
 import EditGuide from "./page/memories/EditGuide";
 import PostMemories from "./page/memories/PostMemories";
+import EditMemories from "./page/memories/EditMemories";
 import MyPage from "./page/myPage/MyPage";
+import MyLove from "./page/myPage/MyLove";
+import MyGuide from "./page/myPage/MyGuide";
+import MyMemories from "./page/myPage/MyMemories";
 import IntroPage from "./page/intro/IntroPage";
 import SearchPlaceByGu from "./page/map/SearchPlaceByGu";
 import Register from "./page/login/Register";
 import SearchPlaceByInput from "./page/map/SearchPlaceByInput";
 
-//const apiUrl = "http://15.164.98.6:8080/";
-const apiUrl = "http://127.0.0.1:8000/";
+const apiUrl = "http://15.164.98.6:8080/";
+//const apiUrl = "http://127.0.0.1:8000/";
 const App = () => {
   return (
     <Routes>
@@ -33,9 +37,18 @@ const App = () => {
         <Route path="/intro" element={<IntroPage />}></Route>
         <Route path="/mem" element={<MemMain />}></Route>
         <Route path="/login" element={<Login apiUrl={apiUrl} />}></Route>
-        <Route path="/accounts/kakao/login/callback" element={<Kakao />} />
+        <Route
+          path="/accounts/kakao/login/callback"
+          element={<Kakao apiUrl={apiUrl} />}
+        ></Route>
         <Route path="/register" element={<Register apiUrl={apiUrl} />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
+        <Route path="/mylove" element={<MyLove apiUrl={apiUrl} />}></Route>
+        <Route path="/myguide" element={<MyGuide apiUrl={apiUrl} />}></Route>
+        <Route
+          path="/mymemories"
+          element={<MyMemories apiUrl={apiUrl} />}
+        ></Route>
         <Route
           path="/writerandom"
           element={<WriteRandom apiUrl={apiUrl} />}
@@ -57,16 +70,12 @@ const App = () => {
           element={<EditGuide apiUrl={apiUrl} />}
         ></Route>
         <Route
-          path="/postMemories"
+          path="/postMemories/:memoryID"
           element={<PostMemories apiUrl={apiUrl} />}
         ></Route>
         <Route
-          path="/postMemories/:memoryID"
-          element={<PostGuide apiUrl={apiUrl} />}
-        ></Route>
-        <Route
           path="/editMemories/:memoryID"
-          element={<EditGuide apiUrl={apiUrl} />}
+          element={<EditMemories apiUrl={apiUrl} />}
         ></Route>
         <Route
           path="/searchplace"
@@ -76,7 +85,10 @@ const App = () => {
           path="/searchplacebyname"
           element={<SearchPlaceByName />}
         ></Route>
-        <Route path="/searchlist" element={<SearchList apiUrl={apiUrl} />}></Route>
+        <Route
+          path="/searchlist"
+          element={<SearchList apiUrl={apiUrl} />}
+        ></Route>
         <Route path="/searchplacebygu" element={<SearchPlaceByGu />}></Route>
         <Route
           path="/searchplacebyinput"
