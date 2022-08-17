@@ -6,8 +6,9 @@ import Avatar from 'react-avatar';
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import instance from './instance';
 
-const Register = () => {
+const Register = ({apiUrl}) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [Image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
     const fileInput = useRef(null)
@@ -64,7 +65,7 @@ const Register = () => {
             console.log(value);
           }
 
-        axios.post("http://127.0.0.1:8000/signup/", formData, config /*{
+        instance.post(`${apiUrl}signup/`, formData, config /*{
             user_id: user_id,
             password: values.password,
             email: values.email,
