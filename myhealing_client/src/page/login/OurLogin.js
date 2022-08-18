@@ -33,6 +33,10 @@ const OurLogin = ({ apiUrl }) => {
         console.log("response : " + response);
         if (response.data.message) {
           console.log(response);
+          localStorage.setItem("user", response.data.user.user_id);
+          localStorage.setItem("nickname", response.data.user.nickname);
+          localStorage.setItem("ourlogin_ph", response.data.user.profile_photo);
+          localStorage.setItem("introduce", response.data.user.introduce);
           cookies.set("user_id", response.data.user.user_id, { path: "/" });
           cookies.set("access_token", response.data.token.access, {
             path: "/",

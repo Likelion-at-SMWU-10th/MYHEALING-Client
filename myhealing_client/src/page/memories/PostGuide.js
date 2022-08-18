@@ -134,7 +134,7 @@ const PostPage = ({ apiUrl }) => {
   const loveAlert = () => {
     Swal.fire({
       title: "마이페이지를 확인하세요!",
-      text: "내가 찜한 리스트가 수정되었습니다.",
+      text: "내가 찜한 가이드 목록이 수정되었습니다.",
       icon: "success",
       showCancelButton: false,
       confirmButtonColor: "#73bd88",

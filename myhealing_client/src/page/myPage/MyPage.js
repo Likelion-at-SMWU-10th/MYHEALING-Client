@@ -1,25 +1,71 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const MyPage = () => {
+const MyPage = ({ apiUrl }) => {
+  const user = localStorage.getItem("user");
+  const nickname = localStorage.getItem("nickname");
+  const introduce = localStorage.getItem("introduce");
+  const profile_photo = localStorage.getItem("profile_photo");
+  const ourlogin_ph = localStorage.getItem("ourlogin_ph");
+
+  //
+
+  const navigate = useNavigate();
   return (
     <Wrapper>
       <MeDiv>
-        <MeImg src="img/search/me.svg"></MeImg>
-        <MyName>감자</MyName>
+        {ourlogin_ph ? (
+          <div>
+            {ourlogin_ph ? (
+              ourlogin_ph == "null" ? (
+                <MeImg src="img/search/me.svg"></MeImg>
+              ) : (
+                <MeImg src={`http://15.164.98.6:8080${ourlogin_ph}`}></MeImg>
+              )
+            ) : (
+              <MeImg src="img/search/me.svg"></MeImg>
+            )}
+          </div>
+        ) : (
+          <div>
+            {profile_photo ? (
+              profile_photo == "null" ? (
+                <MeImg src="img/search/me.svg"></MeImg>
+              ) : (
+                <MeImg src={profile_photo}></MeImg>
+              )
+            ) : (
+              <MeImg src="img/search/me.svg"></MeImg>
+            )}
+          </div>
+        )}
+
+        {nickname ? <MyName>{nickname}</MyName> : <MyName>{user}</MyName>}
+        {introduce ? <AboutMe>{introduce}</AboutMe> : null}
       </MeDiv>
       <ListDiv>
-        <HeartList className="col">
-          <HeartSub>내가 찜한 리스트</HeartSub>
-          <HeartContent>안녕</HeartContent>
+        <HeartList
+          onClick={() => {
+            navigate("/mylove");
+          }}
+        >
+          <HeartSub>내가 찜한 가이드</HeartSub>
         </HeartList>
-        <MyGuide className="col">
+        <MyGuide
+          onClick={() => {
+            navigate("/myguide");
+          }}
+        >
           <GuideSub>내가 작성한 가이드</GuideSub>
-          <GuideContent>{}</GuideContent>
         </MyGuide>
-        <MyMem className="col">
+        <MyMem
+          onClick={() => {
+            navigate("/mymemories");
+          }}
+        >
           <MemSub>내가 남긴 추억</MemSub>
-          <MemContent></MemContent>
         </MyMem>
       </ListDiv>
     </Wrapper>
@@ -29,24 +75,27 @@ const MyPage = () => {
 const Wrapper = styled.div``;
 const MeDiv = styled.div`
   background-color: rgba(217, 217, 217, 0.3);
-  padding: 4rem 0 2rem 0;
+  padding: 2rem 0 2rem 0;
   text-align: center;
 `;
 const MeImg = styled.img`
   width: 85px;
+  height: 85px;
   margin-bottom: 1rem;
+  border-radius: 100%;
 `;
 const MyName = styled.div`
   font-size: 26px;
+`;
+const AboutMe = styled.div`
+  font-size: 15px;
 `;
 const ListDiv = styled.div`
   display: flex;
   flex-direction: row;
 `;
 const HeartList = styled.div`
-  color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  flex-direction: column;
+  color: rgba(0, 0, 0, 0.8);
   width: 80rem;
   height: 17rem;
   border: 1px solid #bdbdbd;
@@ -60,14 +109,8 @@ const HeartSub = styled.div`
   font-size: 1.3rem;
   margin-bottom: 2rem;
 `;
-const HeartContent = styled.div`
-  line-height: 3vh;
-  color: rgba(0, 0, 0, 0.8);
-  font-size: 1rem;
-  font-weight: 500;
-`;
 const MyGuide = styled.div`
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(0, 0, 0, 0.8);
   display: flex;
   flex-direction: column;
   width: 80rem;
@@ -83,14 +126,8 @@ const GuideSub = styled.div`
   font-size: 1.3rem;
   margin-bottom: 2rem;
 `;
-const GuideContent = styled.div`
-  line-height: 3vh;
-  color: rgba(0, 0, 0, 0.8);
-  font-size: 1rem;
-  font-weight: 500;
-`;
 const MyMem = styled.div`
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(0, 0, 0, 0.8);
   display: flex;
   flex-direction: column;
   width: 80rem;
@@ -105,12 +142,6 @@ const MemSub = styled.div`
   font-weight: 700;
   font-size: 1.3rem;
   margin-bottom: 2rem;
-`;
-const MemContent = styled.div`
-  line-height: 3vh;
-  color: rgba(0, 0, 0, 0.8);
-  font-size: 1rem;
-  font-weight: 500;
 `;
 
 export default MyPage;
