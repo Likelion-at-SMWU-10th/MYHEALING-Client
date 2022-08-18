@@ -49,7 +49,7 @@ const LoginContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 120vh;
+  height: 85vh;
 `;
 
 const LoginWrapper = styled.div`

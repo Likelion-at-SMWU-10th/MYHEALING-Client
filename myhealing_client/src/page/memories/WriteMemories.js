@@ -11,6 +11,20 @@ import instance from "../login/instance";
 const cookies = new Cookies();
 
 const WriteMemories = ({ apiUrl }) => {
+  const finishAlert = () => {
+    Swal.fire({
+      title: "저장이 완료되었습니다.",
+      icon: "success",
+      showCancelButton: false,
+      confirmButtonColor: "#73bd88",
+      confirmButtonText: "확인",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.replace("/mymemories");
+      } else {
+      }
+    });
+  };
   const submitAlert = () => {
     Swal.fire({
       title: "저장하시겠습니까?",
@@ -64,16 +78,19 @@ const WriteMemories = ({ apiUrl }) => {
     for (let i = 0; i < inputs.image.length; i++) {
       formData.append("image", inputs.image[i]);
     }
-    // FormData의 key 확인
-    for (let key of formData.keys()) {
-      console.log(key);
+    if (
+      !(
+        inputs.date &&
+        inputs.place &&
+        inputs.title &&
+        inputs.body &&
+        inputs.address
+      )
+    ) {
+      inputAlert();
+    } else if (!dateform.test(inputs.date)) {
+      dateAlert();
     }
-
-    // FormData의 value 확인
-    for (let value of formData.values()) {
-      console.log(value);
-    }
-
     instance
       .post(
         `${apiUrl}memory/`,
@@ -84,6 +101,7 @@ const WriteMemories = ({ apiUrl }) => {
       )
       .then((res) => {
         console.log(res);
+        finishAlert();
       })
       .catch(function (error) {
         console.log(error);
@@ -120,6 +138,31 @@ const WriteMemories = ({ apiUrl }) => {
     }
     setCount(e.target.value.length);
   };
+
+  // input이 없을 경우
+  const inputAlert = () => {
+    Swal.fire({
+      title: "입력하지 않은 항목이 있습니다.",
+      html: "필수 항목 : 주소, 제목, 날짜, 방문한 장소명, 본문<br/>날짜는 형식에 맞게 작성해주세요.",
+      icon: "warning",
+      showCancelButton: false,
+      confirmButtonColor: "#73bd88",
+      confirmButtonText: "확인",
+    });
+  };
+
+  //날짜 형식
+  const dateAlert = () => {
+    Swal.fire({
+      title: "날짜 형식이 틀렸습니다.",
+      html: "다시 입력해주세요.<br/><br/>형식: 0000-00-00",
+      icon: "warning",
+      showCancelButton: false,
+      confirmButtonColor: "#73bd88",
+      confirmButtonText: "확인",
+    });
+  };
+  const dateform = /^([\d]{4})-([\d]{2})-([\d]{2})/;
 
   return (
     <Container>
