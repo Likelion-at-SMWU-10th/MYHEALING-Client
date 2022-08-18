@@ -24,9 +24,8 @@ const MyLove = ({ apiUrl }) => {
       })
       .then((res) => {
         console.log(res);
-        console.log(res.data.results);
-        setData(res.data.results);
-        setCount(res.data.count);
+        console.log(res.data);
+        setData(res.data);
         console.log(data);
       });
   }, []);
@@ -37,7 +36,7 @@ const MyLove = ({ apiUrl }) => {
 
   //pagination
   const [currentpage, setCurrentpage] = React.useState(1);
-  const [count, setCount] = useState();
+  const [count, setCount] = useState(0);
   const [postPerPage] = React.useState(10);
 
   const [indexOfLastPost, setIndexOfLastPost] = React.useState(0);
@@ -45,7 +44,7 @@ const MyLove = ({ apiUrl }) => {
   const [currentPosts, setCurrentPosts] = React.useState(0);
 
   React.useEffect(() => {
-    setCount(count);
+    setCount(data.length);
     setIndexOfLastPost(currentpage * postPerPage);
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
     setCurrentPosts(data.slice(indexOfFirstPost, indexOfLastPost));
@@ -59,43 +58,40 @@ const MyLove = ({ apiUrl }) => {
     <>
       <Wrapper>
         <TitleDiv>내가 찜한 가이드</TitleDiv>
-        <Paging page={currentpage} count={count} setPage={handlePageChange} />
         {currentPosts && data.length > 0 ? (
-          <ContentDiv>
-            <div className="list-group wrapbox">
-              {currentPosts.map((list) => {
-                return (
-                  <a
-                    key={list.id}
-                    className="list-group-item list-group-item-action"
-                    onClick={() => {
-                      navigate(`/postGuide/${list.id}`);
-                    }}
-                  >
-                    {list.user_profile_image ? (
-                      list.user_profile_image == "null" ? (
-                        <img src="img/search/me.svg"></img>
-                      ) : (
-                        <img src={list.user_profile_image}></img>
-                      )
-                    ) : (
-                      <img src="img/search/me.svg"></img>
-                    )}
-                    <Texts>{list.user_name}</Texts>
-                    <Texts>{list.created_at.substring(0, 10)}</Texts>
-                    <StitleDiv className="d-flex w-100 justify-content-between">
-                      <h5 className="mb-1 addmargin">{list.title}</h5>
-                      <small></small>
-                    </StitleDiv>
-                    <p className="mb-1"></p>
-                    <ScontentDiv className="addmargin">
-                      {list.summary}
-                    </ScontentDiv>
-                  </a>
-                );
-              })}
-            </div>
-          </ContentDiv>
+          <>
+            <Paging
+              page={currentpage}
+              count={count}
+              setPage={handlePageChange}
+            />
+            <ContentDiv>
+              <div className="list-group wrapbox">
+                {currentPosts.map((list) => {
+                  return (
+                    <a
+                      key={list.id}
+                      className="list-group-item list-group-item-action"
+                      onClick={() => {
+                        navigate(`/postGuide/${list.id}`);
+                      }}
+                    >
+                      <Texts>{list.user_name}</Texts>
+                      <Texts>{list.created_at.substring(0, 10)}</Texts>
+                      <StitleDiv className="d-flex w-100 justify-content-between">
+                        <h5 className="mb-1 addmargin">{list.title}</h5>
+                        <small></small>
+                      </StitleDiv>
+                      <p className="mb-1"></p>
+                      <ScontentDiv className="addmargin">
+                        {list.summary}
+                      </ScontentDiv>
+                    </a>
+                  );
+                })}
+              </div>
+            </ContentDiv>
+          </>
         ) : (
           <div>게시물이 없습니다.</div>
         )}
@@ -136,7 +132,7 @@ const Wrapper = styled.div`
 `;
 
 const Texts = styled.span`
-  margin-left: 15px;
+  margin: 0 5px;
 `;
 
 export default MyLove;

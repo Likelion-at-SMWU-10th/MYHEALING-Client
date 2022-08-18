@@ -92,7 +92,7 @@ const PostPage = ({ apiUrl }) => {
   };
 
   // 게시글 조회 api
-  useEffect(() => {
+  const getPost = () => {
     instance
       .get(`${apiUrl}guide/${Params.guideID}`, {
         headers: {
@@ -117,7 +117,8 @@ const PostPage = ({ apiUrl }) => {
       .catch(function (error) {
         console.log(error);
       });
-  }, [loveCount]);
+  };
+  useEffect(getPost, [loveCount]);
 
   //love count icon
   const handleIsLove = () => {
@@ -358,7 +359,7 @@ const StarDiv = styled.div`
 
 const StarSDiv = styled.div`
   margin-top: 0.45rem;
-  margin-left: -21px;
+  margin-left: -20.5px;
   font-size: 14px;
   color: #73bd88;
 `;

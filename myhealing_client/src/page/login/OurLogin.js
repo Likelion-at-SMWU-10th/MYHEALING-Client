@@ -45,6 +45,7 @@ const OurLogin = ({ apiUrl }) => {
             path: "/",
           });
           console.log(cookies.get("user_id"));
+          window.location.replace("/");
           setPopup({
             open: true,
             title: "Confirm",

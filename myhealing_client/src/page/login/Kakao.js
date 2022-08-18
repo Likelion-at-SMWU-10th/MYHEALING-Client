@@ -18,14 +18,13 @@ const Kakao = ({ apiUrl }) => {
         console.log(res);
         localStorage.setItem("user", res.data.user);
         localStorage.setItem("profile_photo", res.data.profile_photo);
-        localStorage.setItem("user", res.data.user);
         cookies.set("access_token", res.data.token.access, {
           path: "/",
         });
         cookies.set("refresh_token", res.data.token.refresh, {
           path: "/",
         });
-        navigate("/");
+        window.location.replace("/");
       });
   });
 

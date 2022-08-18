@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -19,7 +19,7 @@ const MyPage = ({ apiUrl }) => {
         {ourlogin_ph ? (
           <div>
             {ourlogin_ph ? (
-              ourlogin_ph == "null" ? (
+              ourlogin_ph === "null" ? (
                 <MeImg src="img/search/me.svg"></MeImg>
               ) : (
                 <MeImg src={`http://15.164.98.6:8080${ourlogin_ph}`}></MeImg>
@@ -31,7 +31,7 @@ const MyPage = ({ apiUrl }) => {
         ) : (
           <div>
             {profile_photo ? (
-              profile_photo == "null" ? (
+              profile_photo === "null" ? (
                 <MeImg src="img/search/me.svg"></MeImg>
               ) : (
                 <MeImg src={profile_photo}></MeImg>
