@@ -34,9 +34,9 @@ const SearchPlaceByInput = ({apiUrl}) => {
                        query:search_text}},config)
    .then(function (response) {
         // response  
-      console.log(response.data.results);
+      console.log(response.data);
         
-      navigate("/searchlist",{state:response.data.results});
+      navigate("/searchlist",{state:response.data});
    }).catch(function (error) {
         console.log(error);
        // 오류발생시 실행

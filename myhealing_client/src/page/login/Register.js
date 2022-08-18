@@ -65,7 +65,7 @@ const Register = ({apiUrl}) => {
             console.log(value);
           }
 
-        instance.post(`${apiUrl}signup/`, formData, config /*{
+        axios.post(`${apiUrl}signup/`, formData, config /*{
             user_id: user_id,
             password: values.password,
             email: values.email,
