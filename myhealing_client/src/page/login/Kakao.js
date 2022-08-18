@@ -16,7 +16,9 @@ const Kakao = ({ apiUrl }) => {
       .get(`${apiUrl}accounts/kakao/accesstoken/${KAKAO_CODE}`)
       .then((res) => {
         console.log(res);
-        console.log(res.data.token);
+        localStorage.setItem("user", res.data.user);
+        localStorage.setItem("profile_photo", res.data.profile_photo);
+        localStorage.setItem("user", res.data.user);
         cookies.set("access_token", res.data.token.access, {
           path: "/",
         });

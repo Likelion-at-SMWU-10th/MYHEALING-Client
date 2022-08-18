@@ -42,7 +42,7 @@ const App = () => {
           element={<Kakao apiUrl={apiUrl} />}
         ></Route>
         <Route path="/register" element={<Register apiUrl={apiUrl} />}></Route>
-        <Route path="/mypage" element={<MyPage />}></Route>
+        <Route path="/mypage" element={<MyPage apiUrl={apiUrl} />}></Route>
         <Route path="/mylove" element={<MyLove apiUrl={apiUrl} />}></Route>
         <Route path="/myguide" element={<MyGuide apiUrl={apiUrl} />}></Route>
         <Route
