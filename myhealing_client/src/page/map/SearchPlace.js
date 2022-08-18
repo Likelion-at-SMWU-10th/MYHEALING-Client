@@ -79,12 +79,11 @@ function SearchPlace({ apiUrl }) {
                         region:sendData.gu}},config)
       .then(function (response) {
           // response  
-          console.log(response.data.results);
 
-          if(response.data.length > 0 ) {
+          if(response.data.count > 0 ) {
             //renderFunction
            // console.log('response: '+response);
-            navigate("/searchlist",{state:response.data.results});
+            navigate("/searchlist",{state:response.data});
           
             //setLists(response.data)
           }
