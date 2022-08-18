@@ -1,32 +1,36 @@
 /* navbar */
 .nav {
-    margin: 0 auto;
-    width:90%;
-    height: 110px;
-    z-index: 2000;
-    background-color: #fff;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+  margin: 0 auto;
+  width: 90%;
+  height: 110px;
+  z-index: 2000;
+  background-color: #fff;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
 }
 
 .nav-link {
-    background-color: #ffffff;
-    border-color: #E7E7E7;
-    color: #73BD88;
-    font-size: 15px;
+  background-color: #ffffff;
+  border-color: #e7e7e7;
+  color: #73bd88;
+  font-size: 15px;
 
-    margin-top: 35px;
-    margin-bottom: 20px;
-    font-weight: 500;
+  margin-top: 35px;
+  margin-bottom: 20px;
+  font-weight: 500;
 }
 
 .navibar-brand {
-    position: 'absolute';
-    text-align: center;
+  position: "absolute";
+  text-align: center;
 
-    margin: 30px auto;
-
+  margin: 30px auto;
 }
 
 .arrrigth {
-    margin-right: 50px;
+  margin-right: 50px;
+}
+
+a:hover {
+  color: #73bd88 !important;
+  text-decoration: none;
 }

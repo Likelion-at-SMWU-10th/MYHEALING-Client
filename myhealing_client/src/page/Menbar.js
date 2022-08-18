@@ -2,8 +2,11 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import "./Menubar.css";
 import LoginBtn from "./component/LoginBtn";
+import styled from "styled-components";
 
 const Menubar = () => {
+  const user = localStorage.getItem("user");
+
   return (
     <div>
       <ul className="nav">
@@ -27,14 +30,28 @@ const Menubar = () => {
             추억 남기기
           </a>
         </li>
-
         <a className="navibar-brand" href="/home">
-          <img src="/img/logo.png" width={190} height={40} alt="Logo"></img>
+          <Logo>
+            <LogoDiv>
+              MY_HEALING
+              <LogoImg
+                src="/img/leaf2.svg"
+                width={190}
+                height={40}
+                alt="Logo"
+              ></LogoImg>
+            </LogoDiv>
+          </Logo>
         </a>
-
         <li className="nav-item">
-          <LoginBtn text="Log in" hreflink="/login" />
-          <LoginBtn text="Register" hreflink="/register" />
+          {user ? (
+            <LoginBtn text="My Page" hreflink="/mypage" />
+          ) : (
+            <>
+              <LoginBtn text="Log in" hreflink="/login" />
+              <LoginBtn text="Register" hreflink="/register" />
+            </>
+          )}
         </li>
       </ul>
 
@@ -42,5 +59,22 @@ const Menubar = () => {
     </div>
   );
 };
-
+const Logo = styled.div`
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+`;
+const LogoDiv = styled.div`
+  position: relative;
+  font-family: "Comfortaa";
+  font-style: normal;
+  font-weight: 400;
+  color: #73bd88;
+  font-size: 2rem;
+  float: left;
+`;
+const LogoImg = styled.img`
+  position: absolute;
+  left: 8rem;
+`;
 export default Menubar;
