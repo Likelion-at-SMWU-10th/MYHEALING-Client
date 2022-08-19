@@ -571,7 +571,6 @@ const CancelBtn = styled.button`
   border: 1px solid #73bd88;
   border-radius: 0.5rem;
   background-color: #ffffff;
-  font-family: "NotoSansKR";
   font-size: 0.9rem;
   font-style: normal;
   font-weight: 500;
@@ -595,7 +594,6 @@ const SubmitBtn = styled.button`
   border: 1px solid #73bd88;
   border-radius: 0.5rem;
   background-color: #ffffff;
-  font-family: "NotoSansKR";
   font-size: 0.9rem;
   font-style: normal;
   font-weight: 500;

@@ -84,7 +84,6 @@ const RandomGuide = styled.div`
 `;
 
 const RandomTitle = styled.div`
-  font-family: "Mulish";
   font-weight: 700;
   font-size: 1.5rem;
   padding-bottom: 3vh;
@@ -108,7 +107,6 @@ const TodayMemories = styled.div`
 `;
 
 const TodayTitle = styled.div`
-  font-family: "Mulish";
   font-weight: 700;
   font-size: 1.5rem;
   padding-bottom: 3vh;
@@ -141,7 +139,6 @@ const GuideBtn = styled.button`
   border: none;
   border-radius: 0.5rem;
   background-color: #73bd88;
-  font-family: "NotoSansKR";
   font-size: 1rem;
   font-style: normal;
   font-weight: 600;
