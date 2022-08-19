@@ -1,28 +1,47 @@
 import React, { useRef } from "react";
 import { CloseButton } from "react-bootstrap";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Bottom = () => {
   const bottomPop = useRef();
   const handleClose = () => {
     bottomPop.current.style.display = "none";
   };
-  return (
-    <BottomPopup ref={bottomPop}>
-      <CloseButton onClick={handleClose} />
+  const user = localStorage.getItem("user");
+  const navigate = useNavigate();
 
-      <Left>
-        <SignupText>
-          나만의 힐링플레이스 공유 사이트, MY_HEALING <br />
-          MY_HEALING을 통해 다양한 가이드를 얻어가세요.
-        </SignupText>
-        <LeafImg src={"/img/leaf.png"} />
-      </Left>
-      <Right>
-        <JoinTodayBtn>Join Today</JoinTodayBtn>
-        <ContactBtn>Contact us</ContactBtn>
-      </Right>
-    </BottomPopup>
+  return (
+    <>
+      {user ? null : (
+        <BottomPopup ref={bottomPop}>
+          <CloseButton onClick={handleClose} />
+          <Left>
+            <SignupText>
+              나만의 힐링플레이스 공유 사이트, MY_HEALING <br />
+              MY_HEALING을 통해 다양한 가이드를 얻어가세요.
+            </SignupText>
+            <LeafImg src={"/img/leaf.png"} />
+          </Left>
+          <Right>
+            <JoinTodayBtn
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              Log in
+            </JoinTodayBtn>
+            <ContactBtn
+              onClick={() => {
+                navigate("/register");
+              }}
+            >
+              Join today
+            </ContactBtn>
+          </Right>
+        </BottomPopup>
+      )}
+    </>
   );
 };
 
@@ -53,7 +72,6 @@ const Left = styled.div`
 `;
 
 const SignupText = styled.div`
-  font-family: "Comfortaa";
   font-weight: 400;
   font-style: normal;
   font-size: 2.7vmin;
@@ -87,7 +105,6 @@ const JoinTodayBtn = styled.button`
   border: none;
   border-radius: 0.5rem;
   background-color: #73bd88;
-  font-family: "NotoSansKR";
   font-size: 1.3rem;
   font-style: normal;
   font-weight: 600;
@@ -96,6 +113,12 @@ const JoinTodayBtn = styled.button`
   padding-top: 0.8vh;
   margin-right: 2vw;
   margin-left: 2vw;
+
+  :hover {
+    background-color: #ffffff;
+    color: #73bd88;
+    border: 2px solid #73bd88;
+  }
 `;
 
 const ContactBtn = styled.button`
@@ -103,10 +126,9 @@ const ContactBtn = styled.button`
   width: 10rem;
   height: 3rem;
   text-align: auto;
-  border: 1px solid #73bd88;
+  border: none;
   border-radius: 0.5rem;
   background-color: #ffffff;
-  font-family: "NotoSansKR";
   font-size: 1.3rem;
   font-style: normal;
   font-weight: 600;
@@ -115,6 +137,12 @@ const ContactBtn = styled.button`
   padding-top: 0.8vh;
   margin-left: 2vw;
   margin-right: 2vw;
+
+  :hover {
+    background-color: #73bd88;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+  }
 `;
 
 export default Bottom;

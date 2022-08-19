@@ -4,9 +4,20 @@ import "./OurLogin.css";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 const cookies = new Cookies();
 
 const OurLogin = ({ apiUrl }) => {
+  const inputAlert = () => {
+    Swal.fire({
+      text: "아이디나 비밀번호를 다시 확인해주세요.",
+      icon: "warning",
+      showCancelButton: false,
+      confirmButtonColor: "#73bd88",
+      confirmButtonText: "확인",
+    });
+  };
+
   const [values, setValues] = useState({
     user_id: "",
     password: "",
@@ -46,11 +57,11 @@ const OurLogin = ({ apiUrl }) => {
           });
           console.log(cookies.get("user_id"));
           window.location.replace("/");
-          setPopup({
-            open: true,
-            title: "Confirm",
-            message: "Login Success!",
-          });
+          // setPopup({
+          //   open: true,
+          //   title: "Confirm",
+          //   message: "Login Success!",
+          // });
         } else {
           console.log(response);
           let message = response.data.message;
@@ -66,7 +77,7 @@ const OurLogin = ({ apiUrl }) => {
         }
       })
       .catch(function (error) {
-        alert("로그인에 실패했습니다.");
+        inputAlert();
         console.log(error);
       });
   };
