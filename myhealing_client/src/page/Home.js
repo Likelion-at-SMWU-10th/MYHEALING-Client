@@ -2,6 +2,7 @@ import React from "react";
 import "./Home.css";
 import { Carousel } from "react-bootstrap";
 import FaceBottom from "./bottom/FaceBottom";
+import Bottom from "./bottom/Bottom";
 
 const home = () => {
   return (
@@ -74,6 +75,7 @@ const home = () => {
         </Carousel.Item>
       </Carousel>
       <FaceBottom />
+      <Bottom />
     </div>
   );
 };

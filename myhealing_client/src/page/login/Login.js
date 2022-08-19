@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { RiKakaoTalkFill } from "react-icons/ri";
-import { SiNaver } from "react-icons/si";
 import OurLogin from "./OurLogin";
 import { useNavigate } from "react-router-dom";
 
@@ -19,7 +18,6 @@ const Login = ({ apiUrl }) => {
   return (
     <LoginContainer>
       <LoginWrapper>
-        <MyHealing>MY_HEALING</MyHealing>
         <Alert>
           가이드를 열람하기 위해서는
           <br />
@@ -49,7 +47,7 @@ const LoginContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 85vh;
+  height: 100vh;
 `;
 
 const LoginWrapper = styled.div`
@@ -73,18 +71,16 @@ const MyHealing = styled.div`
 const Alert = styled.div`
   text-align: center;
   margin-bottom: 2rem;
-  font-family: "Mulish";
   color: #373f41;
   font-size: 2rem;
   font-style: normal;
   font-weight: 700;
   white-space: pre-wrap;
-  line-height: 2rem;
+  line-height: 3rem;
 `;
 
 const Message = styled.div`
   margin-bottom: 1.25rem;
-  font-family: "Mulish";
   color: #737b7d;
   font-size: 1.5rem;
   font-style: normal;
@@ -127,7 +123,6 @@ const LoginMessage = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  font-family: "NotoSansKR";
   font-style: normal;
   color: #000000;
 `;

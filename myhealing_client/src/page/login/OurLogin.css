@@ -1,11 +1,11 @@
 .loginId {
-    width: 25rem;
-    height: 3rem;
+  width: 25rem;
+  height: 3rem;
 }
 
 .ourLoginBtn {
-    width: 25rem;
-    height: 3rem;
-    background-color: #73BD88;
-    border: 1px solid #73BD88;
+  width: 25rem;
+  height: 3rem;
+  background-color: #73bd88;
+  border: 1px solid #73bd88;
 }
