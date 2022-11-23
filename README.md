@@ -32,15 +32,11 @@ MY_HEALING은 **힐링 플레이스**를 찾는 사람들을 위해 **키워드*
 ### 📸 시연 영상
 - [🎥 click!](https://drive.google.com/file/d/1xmaTQziAHwl4NgY2w283t1FlVgwLjdcQ/view?usp=sharing)
 
-
-
-<div><img width=350 src="https://user-images.githubusercontent.com/98384956/188569908-57138de9-0eb5-46f7-bdb7-8d9ce644f148.jpg">
-<img width=350 src="https://user-images.githubusercontent.com/98384956/188569932-fe69971b-3a36-4592-927e-efdbc3f3d8d3.jpg"></div>
-<br>
-<div><img width=350 src="https://user-images.githubusercontent.com/98384956/188570383-17a20499-0b84-41d4-8e45-f38baa929857.jpg">
-<img width=350 src="https://user-images.githubusercontent.com/98384956/188570388-f2d9929c-f7d2-48a4-ade8-091a880cd030.jpg"></div>
-
-
+![m1](https://user-images.githubusercontent.com/87849933/203490874-198958ac-7ca9-4fb5-bc39-c79b3df98c75.gif)
+![m2](https://user-images.githubusercontent.com/87849933/203490882-3f4e8d98-573e-469d-b495-815fc172f04b.gif)
+![m3](https://user-images.githubusercontent.com/87849933/203490886-94cad6f0-1037-4e25-81e5-4a72988b245a.gif)
+![m4](https://user-images.githubusercontent.com/87849933/203490893-94cd0358-4497-4c32-b98e-b0e9c6d96b9d.gif)
+![m5](https://user-images.githubusercontent.com/87849933/203490897-86a44f0d-5edf-485c-a80f-3f05c5bf5813.gif)
 
 ### 🧙🏻‍♀️ MY_HEALING Front-End 팀!
 
